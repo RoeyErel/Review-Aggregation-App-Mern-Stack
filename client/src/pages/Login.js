@@ -3,15 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'
 
 const img1 = 'https://images.unsplash.com/photo-1616530940355-351fabd9524b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80';
-const API_BASE = "http://abctest.com:5000"
+
 
 const Login = () => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const navigate = useNavigate()
     const [error, setError] = useState("");
-
+    const navigate = useNavigate()
     /**
      * @desc Post data to backend for login
      * @Post Email and password
@@ -24,7 +23,7 @@ const Login = () => {
             password: password
           };
         try{     
-            await axios.post(API_BASE + '/api/users/login', userData)
+            await axios.post(process.env.REACT_APP_API_BASE + '/api/users/login', userData)
             .then(response => {
                 if(response.status===400){
                     setError('Invaild credentails')

@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { MdChevronLeft, MdChevronRight} from 'react-icons/md'
 import axios from 'axios'
 import Movie from './Movie'
-const API_BASE = "http://localhost:5000"
 
 const Row = ({rowID, title, fetchURL}) => {
     const [movies, setMovies] = useState([])
 
     useEffect(()=>{
-        axios.get(API_BASE+fetchURL).then((response) =>{
+        axios.get(process.env.REACT_APP_API_BASE + fetchURL).then((response) =>{
             setMovies(response.data.results)
         })
     },[fetchURL])
@@ -17,7 +16,7 @@ const Row = ({rowID, title, fetchURL}) => {
         let slider = document.getElementById('slider' + rowID)
         slider.scrollLeft = slider.scrollLeft - 500
     }
-
+    
     const sliderRight = () =>{
         let slider = document.getElementById('slider' + rowID)
         slider.scrollLeft = slider.scrollLeft + 500

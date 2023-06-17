@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'
-import Cookie from 'js-cookie';
-
-const API_BASE = "http://abctest.com:5000"
-
 
 const Navbar = () => {
     const [user, setUser] = useState('')
-
+    const navigate = useNavigate()
     /**
      * @desc Get user info using JWT token cookie
      * @return Username and Capital first letter as useState variable
      */
     const getUser = async () => {
-        await axios.get(API_BASE + '/api/users/me',{
+        await axios.get(process.env.REACT_APP_API_BASE+ '/api/users/me',{
             withCredentials: true
         })
         .then(res => {
@@ -24,12 +20,27 @@ const Navbar = () => {
             localStorage.setItem('username', (firstLetter+str))
         })
     }
-    const handleLogout= () => {
-        Cookie.remove('authorization');
-    }
     useEffect(() => {
         getUser()
     })
+    /**
+     * @desc Handle logout button
+     * @return Remove cookie
+     */
+    const handleLogout = async () => {
+        await axios.get(process.env.REACT_APP_API_BASE+ '/api/users/logout',{
+            withCredentials: true
+        })
+        .then(res => {
+            console.log(res)
+            navigate('/')
+            setUser(null)
+        })
+        
+        
+    }
+    
+
 
     return (
         <div className= 'flex items-center justify-between z-[100] w-full absolute'>
@@ -50,7 +61,7 @@ const Navbar = () => {
                             <button onClick={handleLogout} className="bg-green-600 px-6 py-2 rounded cursor-pointer text-white">Log Out</button>
                         </div>
                     ) : (          
-                        <div className={API_BASE? 'show' : 'hidden'}>
+                        <div>
                             <Link to='/login'>
                                 <button className="text-white pr-4">Sign In</button>
                             </Link>

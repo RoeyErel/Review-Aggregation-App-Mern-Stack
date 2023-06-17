@@ -72,13 +72,24 @@ export const loginUser = asynchandler (async (req, res) =>{
 //@route GET /api/users/me
 //@access Private
 export const getMe = asynchandler (async (req, res) => {
-    
     const {username} = await User.findById(req.user.id)
     res.status(200).json({
         username
     })
 })
 
+export const logout = asynchandler (async (req, res) => {
+    // Set token to none and expire after 5 seconds
+    res.cookie('authorization', 'none', {
+        expires: new Date(Date.now()),
+        httpOnly: true,
+        secure:false,
+        sameSite:'lax',
+    })
+    res
+        .status(200)
+        .json({ success: true, message: 'User logged out successfully' })
+})
 // Generate token
 const generateToken = (id) =>{
     return jwt.sign({id}, process.env.JWT_SECRET,{

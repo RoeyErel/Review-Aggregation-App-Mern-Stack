@@ -1,13 +1,12 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-const API_BASE = "http://abctest.com:5000"
 
 const Main = ({fetchURL}) => {
     const [Movies, setMovies] = useState([])
     const movie = Movies[Math.floor(Math.random() * Movies.length)]
 
     useEffect(()=>{
-        axios.get(API_BASE+fetchURL)
+        axios.get(process.env.REACT_APP_API_BASE+fetchURL)
             .then((response) => {
                 setMovies(response.data.results)
             })

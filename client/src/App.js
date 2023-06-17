@@ -6,8 +6,9 @@ import Signup from './pages/Signup'
 import Stream from './pages/Stream'
 import axios from "axios";
 import Account from '../src/pages/Account'
-//<Login/>
+
 axios.defaults.withCredentials = true;
+
 function App() {
     return (
         <div className="App">
