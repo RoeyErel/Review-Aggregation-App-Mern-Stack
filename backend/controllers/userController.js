@@ -19,7 +19,15 @@ export const registerUser = asynchandler (async (req, res) => {
     const userExists = await User.findOne({email})
     if(userExists){
         res.status(400)
+        .json({error:'User already exists'})
         throw new Error('User already exists')
+    }
+
+    // check password length
+    if(password.length <= 5){
+        res.status(400)
+        .json({error:"Password must be 6 characters!"})
+        throw new Error ('Password must be 6 characters!')
     }
     //Hash password
     const salt = await bcrypt.genSalt(10)
@@ -38,11 +46,15 @@ export const registerUser = asynchandler (async (req, res) => {
         })
     }else{
         res.status(400)
+        .json({error:"Password must be 6 characters!"})
         throw new Error('Invaild Data')
     }
 
 })
 
+//@desc auth a user
+//@route POST /api/users/login
+//@access Public
 //@desc auth a user
 //@route POST /api/users/login
 //@access Public
@@ -93,7 +105,7 @@ export const logout = asynchandler (async (req, res) => {
 // Generate token
 const generateToken = (id) =>{
     return jwt.sign({id}, process.env.JWT_SECRET,{
-        expiresIn: '1d'
+        expiresIn: '30d'
     })
 
 }

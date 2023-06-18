@@ -28,13 +28,16 @@ const Signup = () => {
         };
         try{        
             fetch(process.env.REACT_APP_API_BASE + "/api/users/Signup", requestOptions)
-            .then(response => {
-                if(response.status===400){
-                    setError('User already exists')
+            .then(response => response.json().then(data => {
+                if(data.error != null){
+                    console.log(data)
+                    setError(data.error)
                 }else{
                     navigate('/login')
                 }
-            })
+                
+                })
+        )
         }catch(error){
             console.log(error)
         }
@@ -51,7 +54,9 @@ const Signup = () => {
                         <div className='flex justify-center items-center'>
                             <h1 className='text-4xl font-bold'>Join Us</h1>
                         </div>
-                        {error ? <p className='p-3 bg-red-400 my-2' >{error}</p>:null}
+                        <div className='py-2'>
+                            {error ? <p className='p-3 bg-red-400 my-2' >{error}</p>:null}
+                        </div>
                         <form  className='w-full flex flex-col py-4' onSubmit={register} method='post'>
                             <input  onChange={(e) => setUser(e.target.value)} className='p-3 my-2 bg-gray-700 rounded' type="text" placeholder='Username'/>
                             <input onChange={ (e) => setEmail(e.target.value) } className='p-3 my-2 bg-gray-700 rounded' type="email" placeholder='Email' autoComplete=''/>

@@ -48,7 +48,9 @@ const Login = () => {
                             <div className='flex justify-center items-center'>
                                <h1 className='text-3xl font-bold'>LOGIN</h1> 
                             </div>
-                            {error ? <p className='p-3 bg-red-400 my-2' >{error}</p>:null}
+                            <div className='py-2'>
+                                {error ? <p className='p-3 bg-red-400 my-2' >{error}</p>:null}
+                             </div>
                             <form onSubmit={LoginForm}  className='w-full flex flex-col py-4'>
                                 <input  onChange={(e) => setEmail(e.target.value)}
                                         className='p-3 my-2 bg-gray-700 rounded'

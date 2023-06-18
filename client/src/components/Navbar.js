@@ -10,18 +10,27 @@ const Navbar = () => {
      * @return Username and Capital first letter as useState variable
      */
     const getUser = async () => {
-        await axios.get(process.env.REACT_APP_API_BASE+ '/api/users/me',{
-            withCredentials: true
-        })
-        .then(res => {
-            const firstLetter = res.data.username.charAt(0).toUpperCase();
-            const str = res.data.username.slice(1)
-            setUser(firstLetter+str)
-            localStorage.setItem('username', (firstLetter+str))
-        })
+        try{
+            await axios.get(process.env.REACT_APP_API_BASE+ '/api/users/me',{
+                withCredentials: true
+            })
+            .then(res => {
+                const firstLetter = res.data.username.charAt(0).toUpperCase();
+                const str = res.data.username.slice(1)
+                setUser(firstLetter+str)
+                localStorage.setItem('username', (firstLetter+str))
+            })
+        }catch(err){
+            
+        }
+
     }
+
     useEffect(() => {
-        getUser()
+
+            getUser()
+
+       
     })
     /**
      * @desc Handle logout button
@@ -32,7 +41,6 @@ const Navbar = () => {
             withCredentials: true
         })
         .then(res => {
-            console.log(res)
             navigate('/')
             setUser(null)
         })
