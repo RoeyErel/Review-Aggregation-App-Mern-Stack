@@ -11,7 +11,7 @@ const Navbar = () => {
      */
     const getUser = async () => {
         try{
-            await axios.get(process.env.REACT_APP_API_BASE+ '/api/users/me',{
+            await axios.get(process.env.REACT_APP_API_BASE + '/api/users/me',{
                 withCredentials: true
             })
             .then(res => {
@@ -23,14 +23,10 @@ const Navbar = () => {
         }catch(err){
             
         }
-
     }
 
     useEffect(() => {
-
             getUser()
-
-       
     })
     /**
      * @desc Handle logout button
