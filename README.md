@@ -25,15 +25,12 @@
 * axios
 
 ### Install frontend
+npm build
 
-npm install axios dotenv js-cookie react react-router-dom react-scripts react-toastify react-youtube tailwind-scrollbar-hide universal-cookie web-vitals
-
-### run frontend
-
+start:
 npm start
 
-### port
-
+on port:
 port 3000
 
 ### Install Backend
@@ -41,10 +38,8 @@ port 3000
 npm install bcryptjs body-parser cookie-parser dotenv cors express express-async-handler is-empty jsonwebtoken mongoose node-fetch nodemon passport passport-jwt validator
 
 
-### run backend
-
+start:
 npm start
 
-### port
-
+on port:
 port 5000
