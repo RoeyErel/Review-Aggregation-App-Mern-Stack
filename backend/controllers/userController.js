@@ -67,7 +67,7 @@ export const loginUser = asynchandler (async (req, res) =>{
             httpOnly: true,
             secure:false,
             sameSite:'lax',
-            expires: new Date(Date.now() + 2348978575),
+            expires: new Date(Date.now() + 2348978575 * 1000),
         })
         .json({
             _id: user.id,

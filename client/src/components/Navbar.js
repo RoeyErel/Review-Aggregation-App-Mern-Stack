@@ -50,19 +50,19 @@ const Navbar = () => {
         <div className= 'flex items-center justify-between z-[100] w-full absolute'>
             <div className='px-4 pt-2 flex items-center justify-between z-[100] w-full'>
                     <Link to='/'>
-                        <h1 className="text-gray-100 text-5xl font-bold cursor-pointer font-[bebas] flex flex-row">Strem.<p className='text-green-600'>io</p></h1>
+                        <h1 className="text-gray-100 text-5xl sm:text-3xl font-bold cursor-pointer font-[bebas] flex flex-row">Strem.<p className='text-green-600'>io</p></h1>
                     </Link>
                     {user ? (
                         <div className='flex flex-row justify-center items-center'>
                             <Link to='/account'>
-                                <div className='bg-gray-800/90 mr-1 flex justify-center items-center'>
-                                    <button className=" px-4 py-2 rounded cursor-pointer text-white flex flex-row justify-center items-center">
+                                <div className='bg-gray-800/90 mr-1 flex justify-center items-center rounded'>
+                                    <button className="px-4 sm:px-1 py-2 sm:text-sm cursor-pointer text-white flex flex-row justify-center items-center">
                                         Hi,&nbsp;
                                         {user}
                                     </button>
                                 </div>
                             </Link>
-                            <button onClick={handleLogout} className="bg-green-600 px-6 py-2 rounded cursor-pointer text-white">Log Out</button>
+                            <button onClick={handleLogout} className="bg-green-600 px-6 py-2 sm:px-1 sm: sm:text-sm rounded cursor-pointer text-white">Log Out</button>
                         </div>
                     ) : (          
                         <div>

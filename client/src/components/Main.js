@@ -34,7 +34,7 @@ const Main = ({fetchURL}) => {
                         <button className='border  text-white border-gray-300 py-2 px-5 ml-4'>Watchlater</button>
                     </div>
                     <p className='text-gray-400 text-sm'>Released: {movie?.release_date}</p>
-                    <p className='w-full md:max-w-[70%] lg:max-w=[50%] xl:max-w-[35%] text-gray-200'>
+                    <p className='w-full max-w-[50%] mt-1 sm:text-[15px] sm:max-w-none text-gray-200'>
                         {turncateStrting(movie?.overview, 250)}
                     </p>
                 </div>

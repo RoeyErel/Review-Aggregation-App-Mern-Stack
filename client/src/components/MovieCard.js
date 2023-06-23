@@ -41,19 +41,18 @@ const MovieCard = ({streamIndex, StreamTV}) => {
     }
     return (
         <div id='main-frame' className='flex flex-col justify-center items-center w-full h-full absolute'>
-            <img className='w-full h-full object-cover absolute z-0' 
+            <img id='bg-img' className='w-full h-full object-cover absolute z-0' 
                     src={`https://image.tmdb.org/t/p/original/${Movie?.backdrop_path}`} 
                     alt={Movie?.title}
             />
-            <div className=' bg-black/80 fixed top-0 left-0 w-full h-screen'></div>
-            <div id='red-container' className='z-50 fixed flex flex-row justify-center items-start w-full h-[600px] rounded-r-md mt-[80px]'>
-
-                <div id='yellow-container' className='flex flex-row w-fit h-[600px]'>
+            <div id='bg-img-filter' className=' bg-black/80 fixed top-0 left-0 w-full h-screen'></div>
+            <div id='red-container' className='z-50 fixed flex flex-row justify-center items-start w-full h-full rounded-r-md mt-[80px] sm:mt-[125px] sm:w-full'>
+                <div id='yellow-container' className='flex flex-row w-fit h-[600px] sm:hidden'>
                     <div id='poster' className='w-[400px] h-full flex'>
-                        <img alt='poster' src={`https://image.tmdb.org/t/p/w500/${Movie?.poster_path}`} className='w-full h-full'/>
+                        <img alt='poster' src={`https://image.tmdb.org/t/p/w500/${Movie?.poster_path}`} className='w-full h-full sm:hidden'/>
                     </div>
                 </div>
-                <div id='green-container' className='text-white flex flex-col w-[700px] h-full mx-8'>
+                <div id='green-container' className='text-white flex flex-col w-[700px] sm:w-full sm:mx-2 h-full mx-8'>
                     <div className='flex justify-start items-start'>
                         <h1 className='text-[45px] px-8 font-bold'>{Movie?.name ? Movie.name : Movie.title}</h1>
                     </div>
@@ -68,7 +67,7 @@ const MovieCard = ({streamIndex, StreamTV}) => {
                             <p  className='text-[18px] font-thin mt-1'>{turncateStrting(Movie.overview, 200)+'...'}</p>
                         </div>
                     </div>
-                    <div id='trailer' className='w-full h-[75%] flex justify-center items-end'>
+                    <div id='trailer' className='w-full h-[400px] flex justify-center items-end sm:hidden'>
                         {<YouTube opts={opts} videoId={Trailer? Trailer.key : 'Y1DZZvTnOH8'}/>}
                     </div>
                 </div>
