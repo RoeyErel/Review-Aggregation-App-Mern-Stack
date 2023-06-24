@@ -46,10 +46,10 @@ const MovieCard = ({streamIndex, StreamTV}) => {
                     alt={Movie?.title}
             />
             <div id='bg-img-filter' className=' bg-black/80 fixed top-0 left-0 w-full h-screen'></div>
-            <div id='red-container' className='z-50 fixed flex flex-row justify-center items-start w-full h-full rounded-r-md mt-[80px] sm:mt-[125px] sm:w-full'>
-                <div id='yellow-container' className='flex flex-row w-fit h-[600px] sm:hidden'>
-                    <div id='poster' className='w-[400px] h-full flex'>
-                        <img alt='poster' src={`https://image.tmdb.org/t/p/w500/${Movie?.poster_path}`} className='w-full h-full sm:hidden'/>
+            <div id='red-container' className='z-50 fixed flex flex-row justify-center items-start w-full h-full rounded-r-md mt-[80px] sm:mt-[125px] md:mt-[140px] sm:w-full'>
+                <div id='yellow-container' className='flex flex-row  w-fit h-[50%] sm:hidden md:w-[28%] md:h-[75%]'>
+                    <div id='poster' className='w-[400px] h-full flex md:items-end md:justify-start'>
+                        <img alt='poster' src={`https://image.tmdb.org/t/p/w500/${Movie?.poster_path}`} className='w-full h-full sm:hidden md:w-full md:h-[100%]'/>
                     </div>
                 </div>
                 <div id='green-container' className='text-white flex flex-col w-[700px] sm:w-full sm:mx-2 h-full mx-8'>
@@ -64,10 +64,10 @@ const MovieCard = ({streamIndex, StreamTV}) => {
                             </p>
                         </div>
                         <div>
-                            <p  className='text-[18px] font-thin mt-1'>{turncateStrting(Movie.overview, 200)+'...'}</p>
+                            <p  className='text-[18px] md:text-[14px] font-thin mt-1'>{turncateStrting(Movie.overview, 300)+'...'}</p>
                         </div>
                     </div>
-                    <div id='trailer' className='w-full h-[400px] flex justify-center items-end sm:hidden'>
+                    <div id='trailer' className='w-full h-[400px] flex justify-center items-end sm:hidden md:hidden'>
                         {<YouTube opts={opts} videoId={Trailer? Trailer.key : 'Y1DZZvTnOH8'}/>}
                     </div>
                 </div>
