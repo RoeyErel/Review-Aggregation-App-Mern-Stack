@@ -29,13 +29,13 @@ const Row = ({rowID, title, fetchURL}) => {
                 <div className='w-14 h-1 bg-green-600 mx-2 rounded-md'></div>
             </div>
             <div className='relative flex items-center group'>
-                <MdChevronLeft onClick={slideLeft} className='bg-white left-0 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden group-hover:block' size={40}  />
+                <MdChevronLeft onClick={slideLeft} className='sm:hidden bg-white left-0 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden group-hover:block' size={40}  />
                 <div id={'slider' + rowID} className='w-full h-full overflow-hidden overflow-x-auto whitespace-nowrap scroll-smooth scrollbar-hide relative ease-in-out'>
                     {movies.map((item,id) => (
                         <Movie key={id} item={item}/>
                     ))}
                 </div>
-                <MdChevronRight onClick={sliderRight} className='bg-white right-0 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden group-hover:block' size={40}  />
+                <MdChevronRight onClick={sliderRight} className='sm:hidden bg-white right-0 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden group-hover:block' size={40}  />
             </div>
         </div>
   )
