@@ -28,6 +28,7 @@ const Navbar = () => {
     useEffect(() => {
             getUser()
     })
+    
     /**
      * @desc Handle logout button
      * @return Remove cookie
@@ -37,20 +38,17 @@ const Navbar = () => {
             withCredentials: true
         })
         .then(res => {
+            localStorage.removeItem('username')
             navigate('/')
             setUser(null)
-        })
-        
-        
+        })    
     }
     
-
-
     return (
         <div className= 'flex items-center justify-between z-[100] w-full absolute'>
             <div className='px-4 pt-2 flex items-center justify-between z-[100] w-full'>
                     <Link to='/'>
-                        <h1 className="text-gray-100 text-5xl sm:text-3xl font-bold cursor-pointer font-[bebas] flex flex-row">Strem.<p className='text-green-600'>io</p></h1>
+                        <h1 className="text-gray-100 text-5xl sm:text-4xl font-bold cursor-pointer font-[bebas] flex flex-row">Strem.<p className='text-green-600'>io</p></h1>
                     </Link>
                     {user ? (
                         <div className='flex flex-row justify-center items-center'>
@@ -70,7 +68,7 @@ const Navbar = () => {
                                 <button className="text-white pr-4">Sign In</button>
                             </Link>
                             <Link to='/Signup'>
-                                <button className="bg-green-600 px-6 py-2 rounded cursor-pointer text-white">Sign Up</button>
+                                <button className="bg-green-600 px-6 py-2 rounded cursor-pointer text-white md:py-1 md:px-3">Sign Up</button>
                             </Link>
                         </div>
                     )}

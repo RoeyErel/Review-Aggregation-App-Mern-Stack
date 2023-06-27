@@ -6,7 +6,7 @@ import Signup from './pages/Signup'
 import Stream from './pages/Stream'
 import axios from "axios";
 import Account from '../src/pages/Account'
-
+import PrivateRoutes from "./components/PrivateRoutes";
 axios.defaults.withCredentials = true;
 
 function App() {
@@ -17,7 +17,9 @@ function App() {
                 <Route path="/" element={<Streamio />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/Signup" element={<Signup />} />
-                <Route path="/Account" element={<Account />} />
+                <Route element={<PrivateRoutes/>}>
+                    <Route path='/account' element={<Account/>} />
+                </Route>
                 <Route path="/stream/:type/:id" element={<Stream />}/>
             </Routes>
         </div>
