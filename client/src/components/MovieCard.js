@@ -43,13 +43,13 @@ const MovieCard = ({streamIndex, StreamTV}) => {
         }
     }
     return (
-        <div id='main-frame' className='flex flex-col justify-center items-center w-full h-full absolute mt-'>
-            <img id='bg-img' className='w-full h-full object-cover absolute z-0' 
+        <div id='main-frame' className='flex flex-col justify-center overflow-y-auto items-center w-full h-full absolute'>
+            <img id='bg-img' className='w-full h-full object-cover absolute' 
                     src={`https://image.tmdb.org/t/p/original/${Movie?.backdrop_path}`} 
                     alt={Movie?.title}
             />
             <div id='bg-img-filter' className=' bg-black/80 fixed top-0 left-0 w-full h-screen'></div>
-            <div id='red-container' className='z-50 fixed flex flex-row justify-center items-start w-full h-full rounded-r-md mt-[150px] sm:mt-[125px] md:mt-[140px] sm:w-full'>
+            <div id='red-container' className='z-50 flex flex-row justify-center items-start w-full h-full mt-[150px] sm:mt-[125px] md:mt-[140px] sm:w-full'>
                 <div id='yellow-container' className='flex flex-row  w-fit h-fit sm:hidden md:w-fit md:h-fit'>
                     <div id='poster' className='w-[400px] h-full flex md:items-start md:justify-center md:px-2'>
                         <img alt='poster' src={`https://image.tmdb.org/t/p/w500/${Movie?.poster_path}`} className='w-full h-full sm:hidden md:w-full md:h-fit'/>
