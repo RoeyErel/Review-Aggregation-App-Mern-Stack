@@ -65,7 +65,7 @@ export const loginUser = asynchandler (async (req, res) =>{
     if(user && (await bcrypt.compare(password, user.password))) {
         res.cookie('authorization', generateToken(user.id), {
             httpOnly: true,
-            secure:false,
+            secure:true,
             sameSite:'lax',
             expires: new Date(Date.now() + 2348978575 * 1000),
         })
@@ -95,7 +95,7 @@ export const logout = asynchandler (async (req, res) => {
     res.cookie('authorization', 'none', {
         expires: new Date(Date.now()),
         httpOnly: true,
-        secure:false,
+        secure:true,
         sameSite:'lax',
     })
     res
