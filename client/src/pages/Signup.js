@@ -14,13 +14,17 @@ const Signup = () => {
             [e.target.name]: e.target.value,
         });
     };
-    
+
     const register = async (e) => {
         e.preventDefault()
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: form
+            body: JSON.stringify({
+                username: form.user,
+                email: form.email,
+                password: form.password
+            }),
         };
         try{        
             fetch(process.env.REACT_APP_API_BASE + "/api/users/Signup", requestOptions)
