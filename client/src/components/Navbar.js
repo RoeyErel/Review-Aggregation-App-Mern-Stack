@@ -26,8 +26,8 @@ const Navbar = () => {
     }
 
     useEffect(() => {
-            getUser()
-    })
+        getUser()
+    },[user])
     
     /**
      * @desc Handle logout button

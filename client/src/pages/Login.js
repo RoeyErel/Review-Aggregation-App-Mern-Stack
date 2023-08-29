@@ -1,40 +1,37 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'
-
+import {BiErrorCircle} from 'react-icons/bi'
 const img1 = 'https://images.unsplash.com/photo-1616530940355-351fabd9524b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80';
 
-
 const Login = () => {
-
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const [form, setForm] = useState({email:"", password:""})
     const [error, setError] = useState("");
     const navigate = useNavigate()
-    /**
-     * @desc Post data to backend for login
-     * @Post Email and password
-     * @return Json with id, name and email
-     */
+
+    const handleInput = (e) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value,
+        });
+    };
+
     const LoginForm = async (e) => {
         e.preventDefault()
-        const userData = {
-            email: email,
-            password: password
-          };
         try{     
-            await axios.post(process.env.REACT_APP_API_BASE + '/api/users/login', userData)
-            .then(response => {
-                if(response.status!==400){
-                    navigate('/')
-                }
-            }).catch((error) => {
-                if( error.response ){
-                    setError('Invaild credentails')
-                }
+            await axios.post(process.env.REACT_APP_API_BASE + '/api/users/login', form)
+                .then(response => {
+                    if(response.status!==400){
+                        navigate('/')
+                    }
+                })
+                .catch((error) => {
+                    if( error.response ){
+                        setError('Invaild credentails')
+                    }
                 })   
         }catch(error){
-            //console.log(error)
+            console.log(error)
         }
     }
     return (
@@ -50,16 +47,22 @@ const Login = () => {
                                <h1 className='text-3xl font-bold'>LOGIN</h1> 
                             </div>
                             <div className='py-2'>
-                                {error ? <p className='p-3 bg-red-400 my-2' >{error}</p>:null}
-                             </div>
+                                {error ? <p className='p-3 bg-red-400 my-2 flex justify-center items-center'><BiErrorCircle className='mx-1 mt-1'/>{error}</p>:null}
+                            </div>
                             <form onSubmit={LoginForm}  className='w-full flex flex-col py-4'>
-                                <input  onChange={(e) => setEmail(e.target.value)}
+                                <input  onChange={handleInput}
                                         className='p-3 my-2 bg-gray-700 rounded'
                                         type="email" 
                                         placeholder='Email'
+                                        name='email'
                                 />
-                                <input onChange={(e) => setPassword(e.target.value)} 
-                                        className='p-3 my-2 bg-gray-700 rounded' type="password" placeholder='Password' autoComplete='current-password' />
+                                <input onChange={handleInput}
+                                        className='p-3 my-2 bg-gray-700 rounded'
+                                        type="password"
+                                        placeholder='Password'
+                                        autoComplete='current-password'
+                                        name='password'
+                                />
                                 <button className='bg-green-600 py-3 my-6 rounded font-bold'>Sign In</button>
                                 <div className='flex justify-between items-center text-sm text-gray-600'>
                                     <div>

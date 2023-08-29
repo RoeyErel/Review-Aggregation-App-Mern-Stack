@@ -4,7 +4,6 @@ import MovieCard from '../components/MovieCard'
 
 const Stream = () => {
     const { type, id } = useParams('')
-    
     return (
         <div>
             <MovieCard streamIndex={id} StreamTV={type}/>

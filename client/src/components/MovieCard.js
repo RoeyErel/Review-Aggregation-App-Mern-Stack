@@ -5,6 +5,7 @@ import YouTube from 'react-youtube'
 const MovieCard = ({streamIndex, StreamTV}) => {
     const [Trailer, setTrailer] = useState([])
     const [Movie, setMovie] = useState(false)
+    const err = -1;
     const opts = {
         height: '350',
         width: '640',
@@ -63,7 +64,7 @@ const MovieCard = ({streamIndex, StreamTV}) => {
                         <div className='flex'>
                             <p className='text-[16px] font-thin'>{turncateStrting(Movie.release_date, 4)}</p>
                             <p className='text-[16px] px-2 flex flex-row justify-start items-center font-thin '><MdStarRate className='mr-1 text-yellow-500'/>
-                                {Movie.vote_average}
+                                {turncateStrting(Movie.vote_average?Movie.vote_average:err.toString(), 3)}
                             </p>
                         </div>
                         <div>
