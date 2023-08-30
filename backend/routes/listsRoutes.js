@@ -6,7 +6,7 @@ dotenv.config()
 
 //routers
 router.get("/", (req, res) => {
-  res.send("Lists is on");
+    res.send("Lists is on");
 });
 
 router.get('/PopularMovies', (req, res)=>{
@@ -59,8 +59,8 @@ router.get('/ShowPopular', (req, res)=>{
           accept: 'application/json',
           Authorization: process.env.Authorization
         }
-      };
-    fetch('https://api.themoviedb.org/3/tv/popular?language=en-US&page=1&with_original_language=en', header)
+    };
+    fetch('https://api.themoviedb.org/4/account/632802a243250f007b7e765a/tv/recommendations?page=1&language=en-US', header)
         .then(res => res.json())
         .then(data => res.json(data))
         .catch(err => console.error("error: ", err));
@@ -85,10 +85,10 @@ router.get('/Trending', (req, res)=>{
     const header = {
         method: 'GET',
         headers: {
-          accept: 'application/json',
-          Authorization: process.env.Authorization
+            accept: 'application/json',
+            Authorization: process.env.Authorization
         }
-      };
+    };
     fetch('https://api.themoviedb.org/3/trending/all/day?language=en-US&with_original_language=en', header)
         .then(res => res.json())
         .then(data => res.json(data))
@@ -111,18 +111,18 @@ router.get('/Stream/:type/:id', (req, res)=>{
 })
 
 router.get('/:id', (req, res)=>{
-  const url = 'https://api.themoviedb.org/3/movie/'+req.params.id+'/videos?language=en-US';
-  const options = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization: process.env.Authorization
-    }
-  };
+    const url = 'https://api.themoviedb.org/3/movie/'+req.params.id+'/videos?language=en-US';
+    const options = {
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+          Authorization: process.env.Authorization
+        }
+    };
   
-  fetch(url, options)
-    .then(res => res.json())
-    .catch(err => console.error('error:' + err));
+    fetch(url, options)
+        .then(res => res.json())
+        .catch(err => console.error('error:' + err));
 })
 
 

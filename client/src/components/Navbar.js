@@ -5,7 +5,6 @@ import axios from 'axios'
 const Navbar = () => {
     const [user, setUser] = useState("")
     const navigate = useNavigate()
-    console.log("render")
     
     useEffect(() => {
         (async () => {
@@ -17,7 +16,7 @@ const Navbar = () => {
      * @return Remove cookie
      */
     const handleLogout = async () => {
-        await axios.get(process.env.REACT_APP_API_BASE+ '/api/users/logout',{
+        await axios.get(process.env.REACT_APP_API_BASE+'/api/users/logout',{
             withCredentials: true
         })
         .then(res => {

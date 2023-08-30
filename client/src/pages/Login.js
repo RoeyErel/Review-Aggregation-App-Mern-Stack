@@ -8,7 +8,7 @@ const Login = () => {
     const [form, setForm] = useState({email:"", password:""})
     const [error, setError] = useState("");
     const navigate = useNavigate()
-    console.log("test")
+    
     const handleInput = (e) => {
         setForm({
             ...form,
@@ -33,8 +33,6 @@ const Login = () => {
                             })
                             navigate('/') 
                         })();
-
-
                     }
                 })
                 .catch((error) => {

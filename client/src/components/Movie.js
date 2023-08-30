@@ -30,4 +30,5 @@ const Movie = ({item}) => {
         </Link>
     )
 }
+
 export default Movie

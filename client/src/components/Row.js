@@ -38,7 +38,7 @@ const Row = ({rowID, title, fetchURL}) => {
                 <MdChevronRight onClick={sliderRight} className='sm:hidden bg-white right-0 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden group-hover:block' size={40}  />
             </div>
         </div>
-  )
+    )
 }
 
 export default Row
