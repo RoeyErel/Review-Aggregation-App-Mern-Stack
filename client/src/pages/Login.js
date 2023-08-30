@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import {BiErrorCircle} from 'react-icons/bi'
@@ -8,7 +8,7 @@ const Login = () => {
     const [form, setForm] = useState({email:"", password:""})
     const [error, setError] = useState("");
     const navigate = useNavigate()
-
+    console.log("test")
     const handleInput = (e) => {
         setForm({
             ...form,
@@ -22,7 +22,19 @@ const Login = () => {
             await axios.post(process.env.REACT_APP_API_BASE + '/api/users/login', form)
                 .then(response => {
                     if(response.status!==400){
-                        navigate('/')
+                        (async () => {
+                            await axios.get(process.env.REACT_APP_API_BASE + '/api/users/me',{
+                                withCredentials: true
+                            })
+                            .then(res => {
+                                const firstLetter = res.data.username.charAt(0).toUpperCase();
+                                const str = res.data.username.slice(1)
+                                localStorage.setItem('username', (firstLetter+str))
+                            })
+                            navigate('/') 
+                        })();
+
+
                     }
                 })
                 .catch((error) => {
@@ -34,6 +46,7 @@ const Login = () => {
             console.log(error)
         }
     }
+
     return (
         <div>
             <div className='w-full h-screen'>
@@ -47,9 +60,9 @@ const Login = () => {
                                <h1 className='text-3xl font-bold'>LOGIN</h1> 
                             </div>
                             <div className='py-2'>
-                                {error ? <p className='p-3 bg-red-400 my-2 flex justify-center items-center'><BiErrorCircle className='mx-1 mt-1'/>{error}</p>:null}
+                                {error ? <p className='p-3 bg-red-400 mt-2 flex justify-center rounded-md items-center'><BiErrorCircle className='mx-1 mt-1'/>{error}</p>:null}
                             </div>
-                            <form onSubmit={LoginForm}  className='w-full flex flex-col py-4'>
+                            <form onSubmit={LoginForm}  className='w-full flex flex-col pb-4'>
                                 <input  onChange={handleInput}
                                         className='p-3 my-2 bg-gray-700 rounded'
                                         type="email" 
@@ -66,7 +79,7 @@ const Login = () => {
                                 <button className='bg-green-600 py-3 my-6 rounded font-bold'>Sign In</button>
                                 <div className='flex justify-between items-center text-sm text-gray-600'>
                                     <div>
-                                        <input className='mr-2' type="checkbox"/> Remember Me
+                                        <input className='mr-2' type="checkbox"/> <span>Remember Me</span>
                                     </div>
                                     <p>Need Help?</p>
                                 </div>

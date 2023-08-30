@@ -27,7 +27,7 @@ const Main = ({fetchURL}) => {
                     src={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`} 
                     alt={movie?.title}
                 />
-                <div className='absolute w-full top-[20%] p-4 md:p-8 font-bold'>
+                <div className='absolute w-full top-[20%] py-4 px-8 md:p-8 font-bold'>
                     <h1 className='text-5xl md:text-3xl'>{movie?.title}</h1>
                     <div className='my-4'>
                     </div>

@@ -7,8 +7,8 @@ const MovieCard = ({streamIndex, StreamTV}) => {
     const [Movie, setMovie] = useState(false)
     const err = -1;
     const opts = {
-        height: '350',
-        width: '640',
+        height: '375',
+        width: '700',
         playerVars: {
           autoplay: 1,
           mute: 1
@@ -19,7 +19,10 @@ const MovieCard = ({streamIndex, StreamTV}) => {
         const data = await details.json()
         setMovie(data)
         const fetchData = await data.videos.results.find(trailer => {
-            if(trailer.name.includes("Opening Credits") || trailer.name.includes("First Look") || trailer.name.includes("Promo") || trailer.name.includes("Trailer")){
+            if(trailer.name.includes("Opening Credits") 
+            || trailer.name.includes("First Look") 
+            || trailer.name.includes("Promo") 
+            || trailer.name.includes("Trailer")){
                 return true
             }else{
                 return false
@@ -30,8 +33,7 @@ const MovieCard = ({streamIndex, StreamTV}) => {
 
     useEffect(() =>{
         fetchStream()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[StreamTV])
+    })
 
     const turncateStrting = (str, num) => {
         if(str?.length > num){
@@ -50,30 +52,35 @@ const MovieCard = ({streamIndex, StreamTV}) => {
                     alt={Movie?.title}
             />
             <div id='bg-img-filter' className=' bg-black/80 fixed top-0 left-0 w-full h-screen'></div>
-            <div id='red-container' className='z-50 flex flex-row justify-center items-start w-full h-full mt-[150px] sm:mt-[125px] md:mt-[140px] sm:w-full'>
-                <div id='yellow-container' className='flex flex-row  w-fit h-fit sm:hidden md:w-fit md:h-fit'>
-                    <div id='poster' className='w-[400px] h-full flex md:items-start md:justify-center md:px-2'>
-                        <img alt='poster' src={`https://image.tmdb.org/t/p/w500/${Movie?.poster_path}`} className='w-full h-full sm:hidden md:w-full md:h-fit'/>
+            <div id='red-container' className='z-50 flex flex-row justify-center items-start w-full h-full mt-[100px] sm:mt-[75px] md:mt-[90px] sm:w-full'>
+                <div id='yellow-container' className='flex flex-row w-[500px] h-[750px] sm:hidden md:hidden md:h-fit'>
+                    <div id='poster' className='w-[500px] h-full flex md:items-start md:justify-center md:px-2'>
+                        <img className='w-full h-full sm:hidden md:w-full md:h-fit' alt='poster' src={`https://image.tmdb.org/t/p/w500/${Movie?.poster_path}`}/>
                     </div>
                 </div>
-                <div id='green-container' className='text-white flex flex-col w-[700px] sm:w-full sm:mx-2 h-full mx-8'>
-                    <div className='flex justify-start items-start'>
-                        <h1 className='text-[45px] px-8 font-bold'>{Movie?.name ? Movie.name : Movie.title}</h1>
-                    </div>
-                    <div id='overview-container' className='flex flex-col px-8'>
-                        <div className='flex'>
-                            <p className='text-[16px] font-thin'>{turncateStrting(Movie.release_date, 4)}</p>
-                            <p className='text-[16px] px-2 flex flex-row justify-start items-center font-thin '><MdStarRate className='mr-1 text-yellow-500'/>
-                                {turncateStrting(Movie.vote_average?Movie.vote_average:err.toString(), 3)}
-                            </p>
+                <div id='green-container' className='text-white flex flex-col w-[700px] h-[750px] sm:w-full sm:mx-2 mx-8'>
+                    <div id='text-container' className='h-[50%] w-full'>
+                        <div id='stream-overview' className='flex justify-start items-start'>
+                            <h1 className='text-[45px] px-8 font-bold'>{Movie?.name ? Movie.name : Movie.title}</h1>
                         </div>
-                        <div>
-                            <p  className='text-[18px] md:text-[14px] font-thin mt-1'>{turncateStrting(Movie.overview, 400)}</p>
+                        <div id='overview-container' className='flex flex-col px-8'>
+                            <div id='rating-box' className='flex'>
+                                <p className='text-[16px] font-thin'>{turncateStrting(Movie.release_date, 4)}</p>
+                                <p className='text-[16px] px-2 flex flex-row justify-start items-center font-thin'><MdStarRate className='mr-1 text-yellow-500'/>
+                                    {turncateStrting(Movie.vote_average? Movie.vote_average : err.toString(), 3)}
+                                </p>
+                            </div>
+                            <div id='overview-box'>
+                                <p  className='text-[18px] md:text-[14px] font-thin mt-1'>{turncateStrting(Movie.overview, 400)}</p>
+                            </div>
                         </div>
                     </div>
-                    <div id='trailer' className='w-full h-[400px] flex justify-center items-end sm:hidden md:hidden'>
-                        {<YouTube opts={opts} videoId={Trailer? Trailer.key : 'Y1DZZvTnOH8'}/>}
+                    <div id='trailer-container' className='h-[50%] w-full flex justify-center items-end p-0 sm:hidden md:'>
+                        <div id='trailer' className='w-full h-[50%] p-0 flex justify-center items-end '>
+                            {<YouTube opts={opts} videoId={Trailer? Trailer.key : 'Y1DZZvTnOH8'}/>}
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
