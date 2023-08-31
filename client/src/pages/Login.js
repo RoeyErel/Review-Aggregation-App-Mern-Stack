@@ -48,7 +48,7 @@ const Login = () => {
     return (
         <div>
             <div className='w-full h-screen'>
-                <img className='sm:hidden block absolute w-full h-full object-cover'
+                <img className='block absolute w-full h-full object-cover'
                     src={img1} alt=''/>
                 <div className=' bg-black/60 fixed top-0 left-0 w-full h-screen'></div>
                 <div className='fixed w-full px-4 py-24 z-50'>

@@ -1,7 +1,7 @@
-import { Route  , Routes} from "react-router-dom";
+import { Route, Routes} from "react-router-dom";
 import Login from './pages/Login'
 import Navbar from './components/Navbar'
-import Streamio from './pages/Streamio'
+import Home from './pages/Home'
 import Signup from './pages/Signup'
 import Stream from './pages/Stream'
 import axios from "axios";
@@ -14,7 +14,7 @@ function App() {
         <div className="App">
             <Navbar />
             <Routes>
-                <Route path="/" element={<Streamio />} />
+                <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/Signup" element={<Signup />} />
                 <Route element={<PrivateRoutes/>}>

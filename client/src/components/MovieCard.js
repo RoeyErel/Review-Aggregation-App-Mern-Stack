@@ -5,7 +5,6 @@ import YouTube from 'react-youtube'
 const MovieCard = ({streamIndex, StreamTV}) => {
     const [Trailer, setTrailer] = useState([])
     const [Movie, setMovie] = useState(false)
-    const err = -1;
     const opts = {
         height: '375',
         width: '700',
@@ -13,7 +12,7 @@ const MovieCard = ({streamIndex, StreamTV}) => {
           autoplay: 1,
           mute: 1
         },
-      };
+    };
     const fetchStream = async () => {
         const details = await fetch('https://api.themoviedb.org/3/'+StreamTV+'/'+streamIndex+'?api_key='+process.env.REACT_APP_API_KEY+'&append_to_response=videos')
         const data = await details.json()
@@ -41,6 +40,8 @@ const MovieCard = ({streamIndex, StreamTV}) => {
                 return str.slice(0,num)+"...";
             }
             return str.slice(0,num);
+        }else if(num === -1){
+            return str
         }else{
             return str
         }
@@ -67,7 +68,7 @@ const MovieCard = ({streamIndex, StreamTV}) => {
                             <div id='rating-box' className='flex'>
                                 <p className='text-[16px] font-thin'>{turncateStrting(Movie.release_date, 4)}</p>
                                 <p className='text-[16px] px-2 flex flex-row justify-start items-center font-thin'><MdStarRate className='mr-1 text-yellow-500'/>
-                                    {turncateStrting(Movie.vote_average? Movie.vote_average : err.toString(), 3)}
+                                    {Movie.vote_average?turncateStrting( Movie.vote_average, 3):turncateStrting("null", -1)}
                                 </p>
                             </div>
                             <div id='overview-box'>
@@ -76,7 +77,7 @@ const MovieCard = ({streamIndex, StreamTV}) => {
                         </div>
                     </div>
                     <div id='trailer-container' className='h-[50%] w-full flex justify-center items-end p-0 sm:hidden md:'>
-                        <div id='trailer' className='w-full h-[50%] p-0 flex justify-center items-end '>
+                        <div id='trailer' className='w-full h-auto p-0 flex justify-center items-end '>
                             {<YouTube opts={opts} videoId={Trailer? Trailer.key : 'Y1DZZvTnOH8'}/>}
                         </div>
                     </div>
