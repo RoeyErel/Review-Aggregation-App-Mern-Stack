@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, {useState} from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import {BiErrorCircle} from 'react-icons/bi'
@@ -60,12 +60,14 @@ const Login = () => {
                             <div className='py-2'>
                                 {error ? <p className='p-3 bg-red-400 mt-2 flex justify-center rounded-md items-center'><BiErrorCircle className='mx-1 mt-1'/>{error}</p>:null}
                             </div>
-                            <form onSubmit={LoginForm}  className='w-full flex flex-col pb-4'>
+                            <form onSubmit={LoginForm}className='w-full flex flex-col pb-4'>
                                 <input  onChange={handleInput}
                                         className='p-3 my-2 bg-gray-700 rounded'
                                         type="email" 
                                         placeholder='Email'
                                         name='email'
+                                        id='email-field'
+                                        autoComplete={true}
                                 />
                                 <input onChange={handleInput}
                                         className='p-3 my-2 bg-gray-700 rounded'

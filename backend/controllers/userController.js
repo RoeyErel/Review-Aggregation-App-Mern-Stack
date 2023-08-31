@@ -66,7 +66,7 @@ export const loginUser = asynchandler (async (req, res) =>{
         res.cookie('authorization', generateToken(user.id), {
             httpOnly: true,
             secure:true,
-            sameSite:'lax',
+            sameSite:'strict',
             expires: new Date(Date.now() + 2348978575 * 1000),
         })
         .json({
@@ -96,7 +96,7 @@ export const logout = asynchandler (async (req, res) => {
         expires: new Date(Date.now()),
         httpOnly: true,
         secure:true,
-        sameSite:'lax',
+        sameSite:'strict',
     })
     res
         .status(200)
