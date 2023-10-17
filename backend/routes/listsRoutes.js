@@ -8,6 +8,20 @@ router.get("/", (req, res) => {
     res.send("Lists is on");
 });
 
+router.get('/Main', (req, res)=>{
+  const header = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: process.env.Authorization
+      }
+    };
+  fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&with_original_language=en', header)
+      .then(res => res.json())
+      .then(data => res.json(data))
+      .catch(err => console.error("error: ", err));
+})
+
 router.get('/PopularMovies', (req, res)=>{
     const header = {
         method: 'GET',
