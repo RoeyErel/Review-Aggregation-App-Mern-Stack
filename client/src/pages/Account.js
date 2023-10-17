@@ -14,7 +14,7 @@ const Account = () => {
                 </div>
             </div>
             <div id='row-container'>
-                <Row rowID='101' title='For You' fetchURL={'/api/lists/PopularMovies'} />
+                <Row rowID='101' title='Trending' fetchURL={'/api/lists/Trending'} />
             </div>
         </div>
     )

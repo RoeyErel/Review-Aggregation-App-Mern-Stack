@@ -1,14 +1,14 @@
 import React, {useState} from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'
-import {BiErrorCircle} from 'react-icons/bi'
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 const img1 = 'https://images.unsplash.com/photo-1616530940355-351fabd9524b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80';
 
 const Login = () => {
     const [form, setForm] = useState({email:"", password:""})
     const [error, setError] = useState("");
     const navigate = useNavigate()
-    
     const handleInput = (e) => {
         setForm({
             ...form,
@@ -28,8 +28,9 @@ const Login = () => {
                             })
                             .then(res => {
                                 const firstLetter = res.data.username.charAt(0).toUpperCase();
-                                const str = res.data.username.slice(1)
-                                localStorage.setItem('username', (firstLetter+str))
+                                const str = res.data.username.slice(1);
+                                localStorage.setItem('username', (firstLetter+str));
+                                localStorage.setItem('ID', (res.data._id));
                             })
                             navigate('/') 
                         })();
@@ -38,6 +39,16 @@ const Login = () => {
                 .catch((error) => {
                     if( error.response ){
                         setError('Invaild credentails')
+                        toast.error('Invaild credentails', {
+                            position: "top-center",
+                            autoClose: 3300,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "dark",
+                        });
                     }
                 })   
         }catch(error){
@@ -58,7 +69,7 @@ const Login = () => {
                                <h1 className='text-3xl font-bold'>LOGIN</h1> 
                             </div>
                             <div className='py-2'>
-                                {error ? <p className='p-3 bg-red-400 mt-2 flex justify-center rounded-md items-center'><BiErrorCircle className='mx-1 mt-1'/>{error}</p>:null}
+                                {error ? <ToastContainer position="top-center" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="dark"/>:null}
                             </div>
                             <form onSubmit={LoginForm}className='w-full flex flex-col pb-4'>
                                 <input  onChange={handleInput}
@@ -67,13 +78,11 @@ const Login = () => {
                                         placeholder='Email'
                                         name='email'
                                         id='email-field'
-                                        autoComplete={true}
                                 />
                                 <input onChange={handleInput}
                                         className='p-3 my-2 bg-gray-700 rounded'
                                         type="password"
                                         placeholder='Password'
-                                        autoComplete='current-password'
                                         name='password'
                                 />
                                 <button className='bg-green-600 py-3 my-6 rounded font-bold'>Sign In</button>

@@ -6,19 +6,19 @@ import Movie from './Movie'
 const Row = ({rowID, title, fetchURL}) => {
     const [movies, setMovies] = useState([])
 
-    useEffect(()=>{
+    useEffect(() => {
         axios.get(process.env.REACT_APP_API_BASE + fetchURL)
             .then((response) =>{
                 setMovies(response.data.results)
         })
     },[fetchURL])
 
-    const slideLeft = () =>{
+    const slideLeft = () => {
         let slider = document.getElementById('slider' + rowID)
         slider.scrollLeft = slider.scrollLeft - 500
     }
     
-    const sliderRight = () =>{
+    const sliderRight = () => {
         let slider = document.getElementById('slider' + rowID)
         slider.scrollLeft = slider.scrollLeft + 500
     }
@@ -26,7 +26,7 @@ const Row = ({rowID, title, fetchURL}) => {
     return (
         <div id='rows' className='my-4'>
             <div className='mt-4 mb-0'>
-                <h2 className='text-white font-bold text-xl md:text-3xl sm:text-2xl px-2 py-1'>{title}</h2>
+                <h2 className='text-white font-bold text-3xl sm:text-2xl px-2 py-1'>{title}</h2>
                 <div className='w-14 h-1 bg-green-600 mx-2 rounded-md'></div>
             </div>
             <div className='relative flex items-center group'>
@@ -42,4 +42,4 @@ const Row = ({rowID, title, fetchURL}) => {
     )
 }
 
-export default Row
+export default React.memo(Row)

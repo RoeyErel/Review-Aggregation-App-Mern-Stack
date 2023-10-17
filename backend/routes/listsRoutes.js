@@ -4,7 +4,6 @@ import fetch from 'node-fetch'
 import dotenv from 'dotenv'
 dotenv.config()
 
-//routers
 router.get("/", (req, res) => {
     res.send("Lists is on");
 });

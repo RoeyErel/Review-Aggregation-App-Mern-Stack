@@ -12,13 +12,13 @@ module.exports = {
       'xl': {'max': '1879px'},
       // => @media (max-width: 1279px) { wide screen }
 
-      'lg': {'max': '1100px'},
+      'lg': {'max': '1200px'},
       // => @media (max-width: 1023px) { min wide screen }
 
       'md': {'max': '950px'},
       // => @media (max-width: 767px) { tablet }
 
-      'sm': {'max': '709px'},
+      'sm': {'max': '650px'},
       // => @media (max-width: 639px) { mobile }
     }
   },
