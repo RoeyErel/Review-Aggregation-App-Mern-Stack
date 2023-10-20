@@ -9,27 +9,27 @@ router.get("/", (req, res) => {
 });
 
 router.get('/Main', (req, res)=>{
-  const header = {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization: process.env.Authorization
-      }
+    const header = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: process.env.Authorization
+        }
     };
-  fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&with_original_language=en', header)
-      .then(res => res.json())
-      .then(data => res.json(data))
-      .catch(err => console.error("error: ", err));
+    fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&with_original_language=en', header)
+        .then(res => res.json())
+        .then(data => res.json(data))
+        .catch(err => console.error("error: ", err));
 })
 
 router.get('/PopularMovies', (req, res)=>{
     const header = {
         method: 'GET',
         headers: {
-          accept: 'application/json',
-          Authorization: process.env.Authorization
+            accept: 'application/json',
+            Authorization: process.env.Authorization
         }
-      };
+    };
     fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&with_original_language=en', header)
         .then(res => res.json())
         .then(data => res.json(data))
@@ -40,10 +40,10 @@ router.get('/NowPlaying', (req, res)=>{
     const header = {
         method: 'GET',
         headers: {
-          accept: 'application/json',
-          Authorization: process.env.Authorization
+            accept: 'application/json',
+            Authorization: process.env.Authorization
         }
-      };
+    };
     fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1&with_original_language=en', header)
         .then(res => res.json())
         .then(data => res.json(data))
@@ -54,10 +54,10 @@ router.get('/TopRated', (req, res)=>{
     const header = {
         method: 'GET',
         headers: {
-          accept: 'application/json',
-          Authorization: process.env.Authorization
+            accept: 'application/json',
+            Authorization: process.env.Authorization
         }
-      };
+    };
     fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1&with_original_language=en', header)
         .then(res => res.json())
         .then(data => res.json(data))
@@ -69,8 +69,8 @@ router.get('/ShowPopular', (req, res)=>{
     const header = {
         method: 'GET',
         headers: {
-          accept: 'application/json',
-          Authorization: process.env.Authorization
+            accept: 'application/json',
+            Authorization: process.env.Authorization
         }
     };
     fetch('https://api.themoviedb.org/4/account/632802a243250f007b7e765a/tv/recommendations?page=1&language=en-US', header)
@@ -84,10 +84,10 @@ router.get('/ShowTopRated', (req, res)=>{
     const header = {
         method: 'GET',
         headers: {
-          accept: 'application/json',
-          Authorization: process.env.Authorization
+            accept: 'application/json',
+            Authorization: process.env.Authorization
         }
-      };
+    };
     fetch('https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1&with_original_language=en', header)
         .then(res => res.json())
         .then(data => res.json(data))
@@ -113,8 +113,8 @@ router.get('/Stream/:type/:id', (req, res)=>{
     const options = {
         method: 'GET',
         headers: {
-          accept: 'application/json',
-          Authorization: process.env.Authorization
+            accept: 'application/json',
+            Authorization: process.env.Authorization
         }
     };  
     fetch(url, options)
@@ -128,8 +128,8 @@ router.get('/:id', (req, res)=>{
     const options = {
         method: 'GET',
         headers: {
-          accept: 'application/json',
-          Authorization: process.env.Authorization
+            accept: 'application/json',
+            Authorization: process.env.Authorization
         }
     };
   
@@ -137,6 +137,5 @@ router.get('/:id', (req, res)=>{
         .then(res => res.json())
         .catch(err => console.error('error:' + err));
 })
-
 
 export default router;

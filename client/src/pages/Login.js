@@ -30,7 +30,7 @@ const Login = () => {
                                 const firstLetter = res.data.username.charAt(0).toUpperCase();
                                 const str = res.data.username.slice(1);
                                 localStorage.setItem('username', (firstLetter+str));
-                                localStorage.setItem('ID', (res.data._id));
+                                localStorage.setItem('ID', (res.data.id));
                             })
                             navigate('/') 
                         })();

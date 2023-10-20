@@ -51,8 +51,8 @@ export const registerUser = asynchandler (async (req, res) => {
         .json({error:"Password must be 6 characters!"})
         throw new Error('Invaild Data')
     }
-
 })
+
 
 //@desc auth a user
 //@route POST /api/users/login
@@ -88,20 +88,21 @@ export const loginUser = asynchandler (async (req, res) => {
 export const getMe = asynchandler (async (req, res) => {
     const {username} = await User.findById(req.user.id)
     res.status(200).json({
-        username
+        username,
+        id:req.user.id
     })
 })
 
 //@desc push saved show
 //@route POST /api/users/savedShow
 //access Private
+//ToDo add func if movie already exists
 export const SaveShow = asynchandler (async (req, res) => {
-    //import vars form body and find user
-    const {id, StreamName, StreamType, Index} = req.body;
-    const updateShows = await User.findById(id)
-    if(updateShows){
-        updateShows.savedShows.push({streamName: StreamName, streamType: StreamType, index: Index});
-        updateShows.save().then(savedDoc => {
+    const {UserId, StreamName, StreamType, id, Poster_path} = req.body;
+    const findUser = await User.findById(UserId)
+    if(findUser){
+        findUser.savedShows.push({streamName: StreamName, streamType: StreamType, id: id, poster_path:Poster_path});
+        findUser.save().then(savedDoc => {
             res.status(201).json({Message:savedDoc})
         })
         .catch((error) => {
@@ -112,6 +113,11 @@ export const SaveShow = asynchandler (async (req, res) => {
     }
 })
 
+
+export const getSavedShow= asynchandler (async (req, res) => {
+    const UserFind = await User.findById(req.user.id)
+    res.status(200).json(UserFind.savedShows)
+})
 //@desc logout user
 //@route POST /api/users/logout
 //access Private
@@ -126,6 +132,7 @@ export const logout = asynchandler (async (req, res) => {
     res.status(200)
         .json({ success: true, message: 'User logged out successfully' })
 })
+
 
 //@desc Generate token
 //access Private

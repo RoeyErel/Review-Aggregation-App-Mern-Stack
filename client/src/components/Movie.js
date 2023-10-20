@@ -1,30 +1,35 @@
-import React,{useEffect, useState} from 'react'
+import React, {useEffect, useState} from 'react'
+import axios from 'axios';
 import {Link} from 'react-router-dom'
 import {FaHeart, FaRegHeart} from 'react-icons/fa'
 import { ToastContainer, toast } from 'react-toastify';
-import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css';
 
 
 const Movie = ({item}) => {
     const [IsMovie, setIsMovie] = useState('')
     const [like, setLike] = useState(false)
+    
+    useEffect(()=>{
+        ifMovie(item.original_title)
+    },[item])
 
     const ifMovie = async (title) =>{
-        if(title != null){
+        if(title != null || item.streamType === 'movie'){
             setIsMovie('movie')
         }else{
             setIsMovie('tv') 
         }
     }
-
+    
     const saveShow = async () => {
         if(localStorage.getItem('username')){
             axios.post(process.env.REACT_APP_API_BASE + '/api/users/savedShow', {
-                Email:localStorage.getItem('username'), // GetEmail
+                UserId:localStorage.getItem('ID'),
                 StreamName:item.name? item.name:item.title,
                 StreamType:item.name? "tv":"movie",
-                Index:item.id
+                id:item.id,
+                Poster_path: item.poster_path,
             })
             setLike(!like)
         }else {
@@ -40,10 +45,6 @@ const Movie = ({item}) => {
             });
         }
     }
-
-    useEffect(()=>{
-        ifMovie(item.original_title)
-    },[item])
 
     return (
         <div className='w-[240px] sm:w-[200px] md:w-[240px] lg:w-[280px] inline-block  relative p-2'>
