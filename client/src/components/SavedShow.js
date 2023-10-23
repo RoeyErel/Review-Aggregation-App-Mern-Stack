@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios';
 import {Link} from 'react-router-dom'
-import {FaHeart, FaRegHeart} from 'react-icons/fa'
+import {AiOutlineClose} from 'react-icons/ai'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
-const Movie = ({item, savedStream}) => {
+const SavedShow = ({item, savedStream}) => {
     const [IsMovie, setIsMovie] = useState('')
     const [like, setLike] = useState(savedStream)
     
@@ -66,15 +65,11 @@ const Movie = ({item, savedStream}) => {
             <div id={item.id} className='absolute top-0 left-0 w-full h-full hover: bg-black/50 opacity-0 hover:opacity-100 text-white flex justify-center items-center'>
                 <Link to={"/Stream/"+ IsMovie +"/"+ item.id} id={item.id} className='cursor-pointer white-space-normal text-lg md:text-sm font-bold flex justify-center items-center whitespace-break-spaces h-full text-center px-2'>{item?.name ? item.name : item.title}</Link>
                 <p onClick={(e) => saveShow(e)}>
-                    {savedStream ? (
-                        <FaHeart className='absolute top-4 left-4 text-gray-300 cursor-pointer' size={20}/>
-                    ) : (
-                        <FaRegHeart className='absolute top-4 left-4 text-gray-300 cursor-pointer' size={20}/>
-                    )}
+                    <AiOutlineClose className='absolute font-bold top-4 left-4 text-gray-300 cursor-pointer' size={20}/>
                 </p>
             </div>
         </div>
     )
 }
 
-export default React.memo(Movie)
+export default SavedShow

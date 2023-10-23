@@ -101,13 +101,30 @@ export const SaveShow = asynchandler (async (req, res) => {
     const {UserId, StreamName, StreamType, id, Poster_path} = req.body;
     const findUser = await User.findById(UserId)
     if(findUser){
-        findUser.savedShows.push({streamName: StreamName, streamType: StreamType, id: id, poster_path:Poster_path});
-        findUser.save().then(savedDoc => {
-            res.status(201).json({Message:savedDoc})
-        })
-        .catch((error) => {
-            res.status(201).json({error:error})
-        })
+        if(!(findUser.savedShows.filter(Stream => Stream.name === StreamName).length > 0)){
+            findUser.savedShows.push({name: StreamName, streamType: StreamType, id: id, poster_path:Poster_path});
+            findUser.save().then(savedDoc => {
+                res.status(201).json({Message:savedDoc})
+            })
+            .catch((error) => {
+                res.status(201).json({error:error})
+            })
+        }else{
+            console.log(StreamName)
+            findUser.savedShows.map(show =>{
+                if(show.name.includes(StreamName)){
+                    findUser.savedShows.pull(show)
+                    findUser.save().then(savedDoc => {
+                        res.status(201)
+                    })
+                    .catch((error) => {
+                        res.status(201).json({error:error})
+                    })
+                }
+            })
+            
+            
+        }
     }else{
         throw new Error('Please login!')
     }

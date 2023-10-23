@@ -6,7 +6,12 @@ const UsersSchema = new mongoose.Schema({
     password: {type: String, require: [true, "Please add a password"],},
     profilePic: {type: String, default:""},
     isAdmin: {type: Boolean, default:false},
-    savedShows: [{id: String, streamName: String, streamType: String, poster_path: String}],
+    savedShows: [{
+        id: String,
+        name: String,
+        streamType: String,
+        poster_path: String,
+    }],
     timestamp: {type: String, default: Date.now(),},
 });
 
