@@ -58,7 +58,7 @@ const Movie = ({item, savedStream}) => {
             });
         }
     }
-
+    
     return (
         <div className='w-[240px] sm:w-[200px] md:w-[240px] lg:w-[280px] inline-block  relative p-2'>
             <img className='w-full h-full block rounded-md' src={`https://image.tmdb.org/t/p/w500/${item?.poster_path}`} alt={item.title}/>

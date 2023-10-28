@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import Movie from '../components/Movie'
+import React from 'react'
 import SavedShows from '../components/SavedShowsRow'
 
 const avatar = 'https://img.freepik.com/free-photo/fashion-boy-with-yellow-jacket-blue-pants_71767-96.jpg?w=740&t=st=1685753646~exp=1685754246~hmac=f43ed2fec1e683987e5f632c44bb6ea91901fdb3772a2e004e280cc377609bd3'

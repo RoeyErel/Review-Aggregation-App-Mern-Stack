@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { MdChevronLeft, MdChevronRight} from 'react-icons/md'
 import axios from 'axios'
-import Movie from './Movie'
 import SavedShow from './SavedShow'
 
-const Row = () => {
+const SavedShowRow = () => {
     const [SavedShows, setSavedShows] = useState([])
 
     useEffect(()=>{
@@ -40,7 +39,7 @@ const Row = () => {
             </div>
             <div className='relative flex items-center group'>
                 <MdChevronLeft onClick={slideLeft} className='sm:hidden bg-white left-0 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden group-hover:block' size={40}  />
-                <div id={'slider' + 1} className=' ml-10 w-full h-full overflow-hidden overflow-x-auto whitespace-nowrap scroll-smooth scrollbar-hide relative ease-in-out'>
+                <div id={'slider' + 1} className=' mx-10 w-full h-full overflow-hidden overflow-x-auto whitespace-nowrap scroll-smooth scrollbar-hide relative ease-in-out'>
                     {SavedShows.map((item, id) => (
                         <SavedShow key={id} item={item} savedStream={SavedShows.some(favorite => favorite.id.includes(item.id))}/>
                     ))}
@@ -51,4 +50,4 @@ const Row = () => {
     )
 }
 
-export default React.memo(Row)
+export default React.memo(SavedShowRow)

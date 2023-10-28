@@ -73,7 +73,7 @@ router.get('/ShowPopular', (req, res)=>{
             Authorization: process.env.Authorization
         }
     };
-    fetch('https://api.themoviedb.org/4/account/632802a243250f007b7e765a/tv/recommendations?page=1&language=en-US', header)
+    fetch('https://api.themoviedb.org/3/tv/popular?language=en-US&page=1&with_original_language=en', header)
         .then(res => res.json())
         .then(data => res.json(data))
         .catch(err => console.error("error: ", err));

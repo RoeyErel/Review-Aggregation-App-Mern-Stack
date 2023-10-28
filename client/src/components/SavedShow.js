@@ -72,4 +72,4 @@ const SavedShow = ({item, savedStream}) => {
     )
 }
 
-export default SavedShow
+export default React.memo(SavedShow)

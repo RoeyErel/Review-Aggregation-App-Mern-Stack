@@ -67,7 +67,7 @@ export const loginUser = asynchandler (async (req, res) => {
     if(user && (await bcrypt.compare(password, user.password))) {
         res.cookie('authorization', generateToken(user.id), {
             httpOnly: true,
-            secure:true,
+            secure:false,//production: true,
             sameSite:'lax',
             expires: new Date(Date.now() + 2348978575 * 1000),
         })
@@ -93,10 +93,9 @@ export const getMe = asynchandler (async (req, res) => {
     })
 })
 
-//@desc push saved show
+//@desc Push saved show
 //@route POST /api/users/savedShow
 //access Private
-//ToDo add func if movie already exists
 export const SaveShow = asynchandler (async (req, res) => {
     const {UserId, StreamName, StreamType, id, Poster_path} = req.body;
     const findUser = await User.findById(UserId)
@@ -110,7 +109,6 @@ export const SaveShow = asynchandler (async (req, res) => {
                 res.status(201).json({error:error})
             })
         }else{
-            console.log(StreamName)
             findUser.savedShows.map(show =>{
                 if(show.name.includes(StreamName)){
                     findUser.savedShows.pull(show)
@@ -122,19 +120,20 @@ export const SaveShow = asynchandler (async (req, res) => {
                     })
                 }
             })
-            
-            
         }
     }else{
         throw new Error('Please login!')
     }
 })
 
-
+//@desc Return all saved shows
+//@route POST /api/users/getSavedShow
+//access Private
 export const getSavedShow= asynchandler (async (req, res) => {
     const UserFind = await User.findById(req.user.id)
     res.status(200).json(UserFind.savedShows)
 })
+
 //@desc logout user
 //@route POST /api/users/logout
 //access Private
@@ -149,7 +148,6 @@ export const logout = asynchandler (async (req, res) => {
     res.status(200)
         .json({ success: true, message: 'User logged out successfully' })
 })
-
 
 //@desc Generate token
 //access Private

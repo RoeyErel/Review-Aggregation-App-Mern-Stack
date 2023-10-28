@@ -54,7 +54,7 @@ const Row = ({rowID, title, fetchURL}) => {
                 <MdChevronLeft onClick={slideLeft} className='sm:hidden bg-white left-0 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden group-hover:block' size={40}  />
                 <div id={'slider' + rowID} className='w-full h-full overflow-hidden overflow-x-auto whitespace-nowrap scroll-smooth scrollbar-hide relative ease-in-out'>
                     {movies.map((item, id) => (
-                        <Movie key={id} item={item} savedStream={SavedShows.some(favorite => favorite.id.includes(item.id))}/>
+                        <Movie key={id} item={item} savedStream={SavedShows.some(favorite => (favorite.name === (item.title?item.title:item.original_name))?true:false) }/>
                     ))}
                 </div>
                 <MdChevronRight onClick={sliderRight} className='sm:hidden bg-white right-0 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden group-hover:block' size={40}  />
