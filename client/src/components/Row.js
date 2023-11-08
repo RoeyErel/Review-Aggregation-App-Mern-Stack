@@ -8,7 +8,7 @@ const Row = ({rowID, title, fetchURL}) => {
     const [SavedShows, setSavedShows] = useState([])
 
 
-    const getSavedShow = async() =>{
+    const getSavedShow = async () =>{
         try{
             await axios.get(process.env.REACT_APP_API_BASE + '/api/users/GetSavedShow',{withCredentials: true})
                 .then(res => {
@@ -18,6 +18,7 @@ const Row = ({rowID, title, fetchURL}) => {
             console.log(err);
         }
     }
+    
     const fetchUrls = async(URL) =>{
         try{
             axios.get(process.env.REACT_APP_API_BASE + URL)
@@ -32,7 +33,7 @@ const Row = ({rowID, title, fetchURL}) => {
     useEffect(() => {
         getSavedShow()
         fetchUrls(fetchURL)
-    },[fetchURL, SavedShows])
+    },[])
 
     const slideLeft = () => {
         let slider = document.getElementById('slider' + rowID)
@@ -63,4 +64,4 @@ const Row = ({rowID, title, fetchURL}) => {
     )
 }
 
-export default React.memo(Row)
+export default Row

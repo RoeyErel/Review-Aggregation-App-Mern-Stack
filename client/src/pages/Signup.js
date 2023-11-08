@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {useNavigate} from 'react-router-dom'
 import {BiErrorCircle} from 'react-icons/bi'
-const img1 = 'https://images.unsplash.com/photo-1616530940355-351fabd9524b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80';
+import {FORM_BG} from '../links';
 
 const Signup = () => {
     const [form, setForm] = useState({user:"", email:"", password:""})
@@ -44,7 +44,7 @@ const Signup = () => {
     return (
         <div>
             <div className='w-full h-screen'>
-                <img className='block absolute w-full h-full object-cover' src={img1} alt=''/>
+                <img className='block absolute w-full h-full object-cover' src={FORM_BG} alt=''/>
                 <div className=' bg-black/70 fixed top-0 left-0 w-full h-screen'></div>
                 <div className='fixed w-full px-4 py-24 z-50'>
                     <div className='max-w-[450px] h-[600px] mx-auto bg-black/75 text-white'>

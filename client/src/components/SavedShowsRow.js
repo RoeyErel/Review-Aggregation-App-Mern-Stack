@@ -6,21 +6,21 @@ import SavedShow from './SavedShow'
 const SavedShowRow = () => {
     const [SavedShows, setSavedShows] = useState([])
 
-    useEffect(()=>{
-        getSavedShow()
-    },[SavedShows]);
-
     const getSavedShow = async() =>{
         try{
             await axios.get(process.env.REACT_APP_API_BASE + '/api/users/GetSavedShow',{withCredentials: true})
-                .then(res => {
-                    setSavedShows(res.data)
-                })
+            .then(res => {
+                setSavedShows(res.data)
+            })
         }catch(err){
             console.log(err);
         }
     }
     
+    useEffect(()=>{
+        getSavedShow()
+    },[]);
+
     const slideLeft = () => {
         let slider = document.getElementById('slider' + 1)
         slider.scrollLeft = slider.scrollLeft - 500

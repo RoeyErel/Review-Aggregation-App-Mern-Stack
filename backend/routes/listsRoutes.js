@@ -138,4 +138,19 @@ router.get('/:id', (req, res)=>{
         .catch(err => console.error('error:' + err));
 })
 
+router.get('/Cast/:type/:id', (req, res)=>{
+    const header = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: process.env.Authorization
+        }
+    };
+    
+    fetch('https://api.themoviedb.org/3/'+req.params.type+'/'+req.params.id+'/credits?language=en-US', header)
+        .then(res => res.json())
+        .then(data => res.json(data))
+        .catch(err => console.error('error:' + err));
+})
+
 export default router;

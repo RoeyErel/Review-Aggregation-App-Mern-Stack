@@ -3,22 +3,23 @@ import { MdChevronLeft, MdChevronRight} from 'react-icons/md'
 import axios from 'axios'
 import Actor from './Actor'
 
-const Cast = ({rowID, title, index, streamType}) => {
+const Cast = ({rowID, title, id, type}) => {
     const [Actors, setActors] = useState([])
 
-    const getCast = async (Type, Index) =>{
+    const getCast = async () =>{
         try{
-            await axios.get(process.env.REACT_APP_API_BASE +'/api/lists/Cast/'+Type+'/'+Index)
+            await axios.get(process.env.REACT_APP_API_BASE +'/api/lists/Cast/'+type+'/'+id)
                 .then(data => {
                     setActors(data.data.cast)
-            })
+                })
         }catch(err){
             console.error(err)
         }
     }
+    
     useEffect(()=>{
-        getCast(streamType, index)
-    },[streamType, index])
+        getCast()
+    },[])
 
     const slideLeft = () =>{
         let slider = document.getElementById('slider' + rowID)

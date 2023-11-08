@@ -37,7 +37,7 @@ const Navbar = () => {
                     {user ? (
                         <div className='flex flex-row justify-center items-center'>
                             <Link to='/account'>
-                                <div className='bg-gray-800/90 hover:bg-gray-700 mr-1 flex justify-center items-center rounded'>
+                                <div id='logoput-btn' className='bg-gray-800/90 hover:bg-gray-700 mr-1 flex justify-center items-center rounded'>
                                     <button className="px-4 sm:px-2 py-2 sm:text-sm cursor-pointer text-white flex flex-row justify-center items-center">
                                         Hi,&nbsp;
                                         {user}

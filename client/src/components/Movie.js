@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import {FaHeart, FaRegHeart} from 'react-icons/fa'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { toastMessage } from '../utils';
 
 
 const Movie = ({item, savedStream}) => {
@@ -32,16 +33,7 @@ const Movie = ({item, savedStream}) => {
                 Poster_path: item.poster_path,
             }).then(res => {
                 if(res.status === 201){
-                    toast.success('Saved Successfully!', {
-                        position: "bottom-center",
-                        autoClose: 1000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "dark",
-                    });
+                    toastMessage("success", "bottom-center")
                 }
             })
             setLike(!like)

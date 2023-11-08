@@ -3,12 +3,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
-const img1 = 'https://images.unsplash.com/photo-1616530940355-351fabd9524b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80';
+import {FORM_BG} from '../links';
+import { toastMessage } from '../utils';
+
 
 const Login = () => {
     const [form, setForm] = useState({email:"", password:""})
     const [error, setError] = useState("");
     const navigate = useNavigate()
+    
     const handleInput = (e) => {
         setForm({
             ...form,
@@ -39,16 +42,7 @@ const Login = () => {
                 .catch((error) => {
                     if( error.response ){
                         setError('Invaild credentails')
-                        toast.error('Invaild credentails', {
-                            position: "top-center",
-                            autoClose: 3300,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                            theme: "dark",
-                        });
+                        toastMessage("error", "top-center")
                     }
                 })   
         }catch(error){
@@ -60,7 +54,7 @@ const Login = () => {
         <div>
             <div className='w-full h-screen'>
                 <img className='block absolute w-full h-full object-cover'
-                    src={img1} alt=''/>
+                    src={FORM_BG} alt=''/>
                 <div className=' bg-black/60 fixed top-0 left-0 w-full h-screen'></div>
                 <div className='fixed w-full px-4 py-24 z-50'>
                     <div className='max-w-[450px] h-[500px] mx-auto bg-black/75 text-white'>
