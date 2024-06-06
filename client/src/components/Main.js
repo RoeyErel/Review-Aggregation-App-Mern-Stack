@@ -5,13 +5,6 @@ const Main = ({fetchURL}) => {
     const [Movies, setMovies] = useState([])
     const movie = Movies[Math.floor(Math.random() * Movies.length)]
     
-    useEffect(()=>{
-        axios.get(process.env.REACT_APP_API_BASE+fetchURL)
-            .then((response) => {
-                setMovies(response.data.results)
-            })
-    },[fetchURL])
-
     const turncateStrting = (str, num) =>{
         if(str?.length > num){
             return str.slice(0,num) + '...';
@@ -19,6 +12,16 @@ const Main = ({fetchURL}) => {
             return str
         }
     }
+
+    useEffect(() => {
+        const getMovies = async (url) => {
+            await axios.get(process.env.REACT_APP_API_BASE+url)
+            .then((response) => {
+                setMovies(response.data.results)
+            })
+        };
+        getMovies(fetchURL)
+    },[fetchURL])
 
     return (
         <div className="w-full h-[650px] text-white">

@@ -8,5 +8,5 @@ router.post('/login', userController.loginUser)
 router.get('/logout', userController.logout)
 router.post('/savedShow', userController.SaveShow)
 router.get('/me', authMiddleware.protect, userController.getMe)
-router.get('/GetSavedShow', authMiddleware.protect, userController.getSavedShow)
+
 export default router;

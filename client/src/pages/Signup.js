@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import {useNavigate} from 'react-router-dom'
-import {BiErrorCircle} from 'react-icons/bi'
 import {FORM_BG} from '../links';
+import { ToastContainer } from 'react-toastify';
+import { toastMessage } from '../utils';
 
 const Signup = () => {
     const [form, setForm] = useState({user:"", email:"", password:""})
@@ -30,7 +31,7 @@ const Signup = () => {
             fetch(process.env.REACT_APP_API_BASE + "/api/users/Signup", requestOptions)
                 .then(response => response.json().then(data => {
                         if(data.error != null){
-                            console.log(data)
+                            toastMessage("error", "top-center", "Invaild credentails")
                             setError(data.error)
                         }else{
                             navigate('/login')
@@ -53,7 +54,7 @@ const Signup = () => {
                                 <h1 className='text-4xl font-bold'>Join Us</h1>
                             </div>
                             <div className='py-2'>
-                                {error ? <p className='p-3 bg-red-400 my-2 flex justify-center items-center'><BiErrorCircle className='mx-1 mt-1'/>{error}</p>:null}
+                                {error ? <ToastContainer position="top-center" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="dark"/>:null}
                             </div>
                             <form  className='w-full flex flex-col py-4' onSubmit={register} method='post'>
                                 <input onChange={handleInput} name='user' className='p-3 my-2 bg-gray-700 rounded' type="text" placeholder='Username'/>

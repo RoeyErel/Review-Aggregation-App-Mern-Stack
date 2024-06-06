@@ -7,6 +7,7 @@ import Stream from './pages/Stream'
 import axios from "axios";
 import Account from '../src/pages/Account'
 import PrivateRoutes from "./components/PrivateRoutes";
+
 axios.defaults.withCredentials = true;
 
 function App() {

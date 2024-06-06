@@ -2,18 +2,15 @@ import React, {useEffect, useState} from 'react'
 import axios from 'axios';
 import {Link} from 'react-router-dom'
 import {AiOutlineClose} from 'react-icons/ai'
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { toastMessage } from '../utils';
 
 const SavedShow = ({item, savedStream}) => {
     const [IsMovie, setIsMovie] = useState('')
     const [like, setLike] = useState(savedStream)
-    
-    useEffect(()=>{
-        ifMovie(item)
-    },[item])
 
-    const ifMovie = async (Stream) =>{
+    const ifMovie = async (Stream) => {
         if(Stream.original_title != null || Stream.streamType === 'movie'){
             setIsMovie('movie')
         }else{
@@ -31,32 +28,18 @@ const SavedShow = ({item, savedStream}) => {
                 Poster_path: item.poster_path,
             }).then(res => {
                 if(res.status === 201){
-                    toast.success('Saved Successfully!', {
-                        position: "bottom-center",
-                        autoClose: 1000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "dark",
-                    });
+                    toastMessage("success", "bottom-center", "Saved Successfully!")
                 }
             })
             setLike(!like)
         }else {
-            toast.error('Please Log in!', {
-                position: "bottom-center",
-                autoClose: 1300,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-            });
+            toastMessage("error", "bottom-center", 'Please Log in!')
         }
     }
+
+    useEffect(() => {
+        ifMovie(item)
+    },[item])
 
     return (
         <div className='w-[240px] sm:w-[200px] md:w-[240px] lg:w-[280px] inline-block  relative p-2'>

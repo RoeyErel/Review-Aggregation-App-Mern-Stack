@@ -59,28 +59,30 @@ export const registerUser = asynchandler (async (req, res) => {
 //@desc auth a user
 //@route POST /api/users/login
 //@access Public
-export const loginUser = asynchandler (async (req, res) => {
-    //import vars form body
-    const {email, password} = req.body
-    //Check for user email
-    const user = await User.findOne({email})
-    if(user && (await bcrypt.compare(password, user.password))) {
+export const loginUser = asynchandler(async (req, res) => {
+    const { email, password } = req.body;
+
+    // Check for user email
+    const user = await User.findOne({ email });
+
+    if (user && await bcrypt.compare(password, user.password)) {
         res.cookie('authorization', generateToken(user.id), {
             httpOnly: true,
-            secure:false,//production: true,
-            sameSite:'lax',
-            expires: new Date(Date.now() + 2348978575 * 1000),
-        })
-        .json({
+            secure: process.env.NODE_ENV === 'production', // Set secure flag in production
+            sameSite: 'lax',
+            expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // Cookie expires in 30 days
+        });
+
+        res.json({
             _id: user.id,
             name: user.username,
             email: user.email,
-        })
-    }else{
-        res.status(400)
-        throw new Error('Invaild credentails')
+            savedShows: user.savedShows,
+        });
+    } else {
+        res.status(400).json({ message: 'Invalid credentials' });
     }
-})
+});
 
 //@desc Get user data
 //@route GET /api/users/me
@@ -113,10 +115,10 @@ export const SaveShow = asynchandler (async (req, res) => {
                 if(show.name.includes(StreamName)){
                     findUser.savedShows.pull(show)
                     findUser.save().then(savedDoc => {
-                        res.status(201)
+                        res.status(200).json({Message:savedDoc})
                     })
                     .catch((error) => {
-                        res.status(201).json({error:error})
+                        res.status(401).json({error:error})
                     })
                 }
             })
@@ -124,14 +126,6 @@ export const SaveShow = asynchandler (async (req, res) => {
     }else{
         throw new Error('Please login!')
     }
-})
-
-//@desc Return all saved shows
-//@route POST /api/users/getSavedShow
-//access Private
-export const getSavedShow= asynchandler (async (req, res) => {
-    const UserFind = await User.findById(req.user.id)
-    res.status(200).json(UserFind.savedShows)
 })
 
 //@desc logout user

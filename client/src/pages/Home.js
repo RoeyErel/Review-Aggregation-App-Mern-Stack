@@ -2,7 +2,7 @@ import React from 'react'
 import Main from '../components/Main'
 import Row from '../components/Row'
 
-const Home = () => {
+const Home = () => {    
     return (
         <div id='Main'>
             <Main fetchURL={'/api/lists/Main'}/>

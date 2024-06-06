@@ -22,7 +22,7 @@ const Stream = () => {
             <img id='bg-img' className='w-full h-full object-cover absolute' src={TMDB_IMG_URL + Movie?.backdrop_path} alt={Movie?.title}/>
             <div id='bg-img-filter' className=' bg-gradient-to-t from-[#000500] to-black/70 relative top-0 left-0 w-full h-full'></div>
             <div className='w-[90%] h-full absolute'>
-                <MovieCard streamIndex={id} StreamTV={type} />
+                <MovieCard streamIndex={id} StreamType={type} />
                 <Cast rowID='11' title='Cast' id={id} type={type} />
             </div>
         </div>
