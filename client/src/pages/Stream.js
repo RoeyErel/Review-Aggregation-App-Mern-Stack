@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import MovieCard from '../components/StreamCard/MovieCard'
 import Cast from '../components/StreamCard/Cast'
 import {TMDB_IMG_URL} from '../links'
+import ReviewsRow from '../components/Reviews-Section/ReviewsRow'
 const Stream = () => {
     const { type, id } = useParams('')
     const [Movie, setMovie] = useState(false)
@@ -24,6 +25,7 @@ const Stream = () => {
             <div className='w-[90%] h-full absolute'>
                 <MovieCard streamIndex={id} StreamType={type} />
                 <Cast rowID='11' title='Cast' id={id} type={type} />
+                <ReviewsRow id={id} type={type} />
             </div>
         </div>
     )

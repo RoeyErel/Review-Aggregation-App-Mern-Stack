@@ -4,22 +4,20 @@ import { MdChevronLeft, MdChevronRight} from 'react-icons/md'
 import { rowSlider } from '../utils'
 import axios from 'axios'
 
-
 const SavedShowRow = () => {
     const [SavedShows, setSavedShows] = useState([])
 
-    const getSavedShow = async() =>{
-        try{
-            await axios.get(process.env.REACT_APP_API_BASE + '/api/users/GetSavedShow',{withCredentials: true})
-            .then(res => {
-                setSavedShows(res.data)
-            })
-        }catch(err){
-            console.log(err);
-        }
-    }
-    
     useEffect(()=>{
+        const getSavedShow = async() =>{
+            try{
+                await axios.get(process.env.REACT_APP_API_BASE + '/api/users/GetSavedShow',{withCredentials: true})
+                .then(res => {
+                    setSavedShows(res.data)
+                })
+            }catch(err){
+                console.log(err);
+            }
+        }
         getSavedShow()
     },[]);
     

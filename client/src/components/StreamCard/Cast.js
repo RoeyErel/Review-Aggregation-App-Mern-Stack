@@ -22,7 +22,7 @@ const Cast = ({rowID, title, id, type}) => {
     },[type, id])
     
     return (
-        <div id='Cast-Row' className='mt-4 mb-14'>
+        <div id='Cast-Row-Main' className='mt-4 mb-14'>
             <div className='mt-4 mb-0'>
                 <h2 className='text-white font-bold text-4xl md:text-3xl sm:text-2xl px-2 pt-1 pb-4'>{title}</h2>
             </div>

@@ -7,6 +7,9 @@ router.post('/signup', userController.registerUser)
 router.post('/login', userController.loginUser)
 router.get('/logout', userController.logout)
 router.post('/savedShow', userController.SaveShow)
+
+//protected routes by cookies
 router.get('/me', authMiddleware.protect, userController.getMe)
+router.get('/GetSavedShow', authMiddleware.protect, userController.getSavedShow)
 
 export default router;

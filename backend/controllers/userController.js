@@ -143,6 +143,13 @@ export const logout = asynchandler (async (req, res) => {
         .json({ success: true, message: 'User logged out successfully' })
 })
 
+export const getSavedShow = asynchandler(async (req, res) => {
+    const user = await User.findById(req.user.id)
+    if(user){
+        res.status(200).json(user.savedShows)
+    }
+});
+
 //@desc Generate token
 //access Private
 const generateToken = (id) =>{

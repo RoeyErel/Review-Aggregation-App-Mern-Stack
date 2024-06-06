@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 
 //Configurations
 dotenv.config();
+
 export const protect = asyncHandler(async (req, res, next) => {
     const token = req.cookies.authorization
     if (token) {

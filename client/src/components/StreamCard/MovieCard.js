@@ -17,11 +17,11 @@ const MovieCard = ({ streamIndex, StreamType }) => {
             );
             const movieData = response.data;
             setMovie(movieData);
-    
+
             const trailerData = movieData.videos?.results.find(trailer =>
                 ['Opening Credits', 'First Look', 'Promo', 'Trailer', 'Opening 1'].some(keyword => trailer.name.includes(keyword))
             );
-    
+            
             setTrailer(trailerData);
         } catch (error) {
             console.error("Error fetching stream data:", error);
@@ -33,7 +33,7 @@ const MovieCard = ({ streamIndex, StreamType }) => {
     }, [streamIndex, StreamType, Movie]);
 
     return (
-        <div id='main-frame' className='flex flex-col justify-center items-center w-full h-fit'>
+        <div id='MovieCard-Main' className='flex flex-col justify-center items-center w-full h-fit'>
             <div
                 id='red-container'
                 className='z-50 flex flex-row justify-center items-start w-full h-full mt-[100px] sm:mt-[75px] md:mt-[90px]'
@@ -80,7 +80,7 @@ const MovieCard = ({ streamIndex, StreamType }) => {
                                         <iframe
                                             id='trailer'
                                             className='w-full h-full md:h-[315px] sm:h-[200px]'
-                                            src={`https://www.youtube.com/embed/${Trailer.key}`}
+                                            src={'https://www.youtube.com/embed/'+Trailer?.key}
                                             title='Trailer'
                                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                             allowFullScreen

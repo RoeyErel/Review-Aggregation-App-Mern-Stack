@@ -79,6 +79,20 @@ router.get('/ShowPopular', (req, res)=>{
         .catch(err => console.error("error: ", err));
 })
 
+router.get('/getReviews/:type/:id', (req, res)=>{
+    const header = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: process.env.Authorization
+        }
+    };
+    fetch('https://api.themoviedb.org/3/'+req.params.type+'/'+req.params.id+'/reviews?language=en-US&page=1', header)
+        .then(res => res.json())
+        .then(data => res.json(data))
+        .catch(err => console.error("error: ", err));
+})
+
 
 router.get('/ShowTopRated', (req, res)=>{
     const header = {
