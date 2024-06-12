@@ -6,9 +6,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toastMessage } from '../utils';
 
-const SavedShow = ({item, savedStream}) => {
+const SavedShow = ({item, }) => {
     const [IsMovie, setIsMovie] = useState('')
-    const [like, setLike] = useState(savedStream)
 
     const ifMovie = async (Stream) => {
         if(Stream.original_title != null || Stream.streamType === 'movie'){
@@ -18,9 +17,9 @@ const SavedShow = ({item, savedStream}) => {
         }
     }
     
-    const saveShow = async () => {
+    const removeSavedShow = async () => {
         if(localStorage.getItem('username')){
-            axios.post(process.env.REACT_APP_API_BASE + '/api/users/savedShow', {
+            await axios.post(process.env.REACT_APP_API_BASE + '/api/users/savedShow', {
                 UserId: localStorage.getItem('ID'),
                 StreamName: item.name? item.name:item.title,
                 StreamType: item.name? "tv":"movie",
@@ -31,7 +30,6 @@ const SavedShow = ({item, savedStream}) => {
                     toastMessage("success", "bottom-center", "Saved Successfully!")
                 }
             })
-            setLike(!like)
         }else {
             toastMessage("error", "bottom-center", 'Please Log in!')
         }
@@ -47,7 +45,7 @@ const SavedShow = ({item, savedStream}) => {
             <ToastContainer position="top-center" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="dark"/>
             <div id={item.id} className='absolute top-0 left-0 w-full h-full hover: bg-black/50 opacity-0 hover:opacity-100 text-white flex justify-center items-center'>
                 <Link to={"/Stream/"+ IsMovie +"/"+ item.id} id={item.id} className='cursor-pointer white-space-normal text-lg md:text-sm font-bold flex justify-center items-center whitespace-break-spaces h-full text-center px-2'>{item?.name ? item.name : item.title}</Link>
-                <p onClick={(e) => saveShow(e)}>
+                <p onClick={(e) => removeSavedShow(e)}>
                     <AiOutlineClose className='absolute font-bold top-4 left-4 text-gray-300 cursor-pointer' size={20}/>
                 </p>
             </div>

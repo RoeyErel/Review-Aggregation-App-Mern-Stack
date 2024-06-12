@@ -6,7 +6,7 @@ import { rowSlider } from '../utils'
 
 const Row = ({rowID, title, fetchURL}) => {
     const [movies, setMovies] = useState([])
-
+    const [savedShows, setSavedShows] = useState(JSON.parse(localStorage.getItem('savedShows')) || [])
 
     
     const fetchUrls = async(url) =>{
@@ -19,6 +19,7 @@ const Row = ({rowID, title, fetchURL}) => {
             console.log(err)
         }
     }
+
 
     useEffect(() => {
         fetchUrls(fetchURL)
@@ -34,7 +35,8 @@ const Row = ({rowID, title, fetchURL}) => {
                 <MdChevronLeft onClick={() => rowSlider("left", rowID)} className='sm:hidden bg-white left-0 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden group-hover:block' size={40}  />
                 <div id={'slider' + rowID} className='w-full h-full overflow-hidden overflow-x-auto whitespace-nowrap scroll-smooth scrollbar-hide relative ease-in-out'>
                     {movies.map((item, id) => (
-                        <Movie key={id} item={item}/>
+                        // eslint-disable-next-line eqeqeq
+                        <Movie key={id} item={item} liked={savedShows.some((favorite) => favorite.id == item.id )} />
                     ))}
                 </div>
                 <MdChevronRight onClick={() => rowSlider("right", rowID)} className='sm:hidden bg-white right-0 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden group-hover:block' size={40}  />
