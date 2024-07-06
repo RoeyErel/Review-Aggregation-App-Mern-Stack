@@ -19,16 +19,28 @@ const Stream = () => {
     },[type, id])
 
     return (
-        <div id='Stream-Header' className='flex flex-col justify-center overflow-y-auto items-center w-full h-full absolute'>
-            <img id='bg-img' className='w-full h-full object-cover absolute' src={TMDB_IMG_URL + Movie?.backdrop_path} alt={Movie?.title}/>
-            <div id='bg-img-filter' className=' bg-gradient-to-t from-[#000500] to-black/70 relative top-0 left-0 w-full h-full'></div>
-            <div className='w-[90%] h-full absolute'>
-                <MovieCard streamIndex={id} StreamType={type} />
-                <Cast rowID='11' title='Cast' id={id} type={type} />
+        <div id='Stream-Page-Main' className='flex flex-col items-center w-full h-full relative overflow-hidden'>
+            <div className='fixed inset-0 z-0'>
+                <img
+                    id='bg-img'
+                    className='w-full h-full object-cover'
+                    src={TMDB_IMG_URL + Movie?.backdrop_path}
+                    alt={Movie?.title}
+                />
+                <div
+                    id='bg-img-filter'
+                    className='bg-gradient-to-t from-[#000500] to-black/70 absolute top-0 left-0 w-full h-full'
+                ></div>
+            </div>
+            <div className='w-[90%] h-full flex flex-col z-10 overflow-y-auto space-y-8'>
+                <div className='flex w-full h-full flex-col'>
+                    <MovieCard streamIndex={id} StreamType={type} />
+                    <Cast rowID='11' title='Cast' id={id} type={type} />
+                </div>
                 <ReviewsRow id={id} type={type} />
             </div>
         </div>
-    )
+    )    
 }
 
 export default Stream

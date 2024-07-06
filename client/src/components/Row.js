@@ -20,7 +20,6 @@ const Row = ({rowID, title, fetchURL}) => {
         }
     }
 
-
     useEffect(() => {
         fetchUrls(fetchURL)
     },[fetchURL])

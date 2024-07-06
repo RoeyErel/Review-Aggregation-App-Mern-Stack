@@ -4,8 +4,8 @@ import { DEFAULT_IMG } from '../../links'
 const Actor = ({actor}) => {
     //delet (Uncredited)
     return (
-        <div id='Actor-main' className='w-[160px] sm:w-[180px] md:w-[190px] inline-block relative mx-1 align-middle'>
-            <img className={actor.profile_path? 'w-full h-full block  sm:m-0': 'block w-[160px] sm:w-[180px]'} 
+        <div id='Actor-main' className='w-[160px] sm:w-[120px] md:w-[190px] inline-block relative mx-1 align-middle'>
+            <img className={actor.profile_path? 'w-full h-full block sm:m-0': 'block w-[160px] sm:w-[180px]'} 
                 src={actor.profile_path? `https://image.tmdb.org/t/p/w500/${actor.profile_path}` : DEFAULT_IMG} 
                 alt={actor.name}
             />

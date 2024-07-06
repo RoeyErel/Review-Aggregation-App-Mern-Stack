@@ -33,15 +33,9 @@ const MovieCard = ({ streamIndex, StreamType }) => {
     }, [streamIndex, StreamType, Movie]);
 
     return (
-        <div id='MovieCard-Main' className='flex flex-col justify-center items-center w-full h-fit'>
-            <div
-                id='red-container'
-                className='z-50 flex flex-row justify-center items-start w-full h-full mt-[100px] sm:mt-[75px] md:mt-[90px]'
-            >
-                <div
-                    id='yellow-container'
-                    className='flex flex-row justify-center items-center w-[25%] mx-4 lg:hidden md:hidden sm:hidden'
-                >
+        <div id='MovieCard-Main' className='flex flex-col justify-center items-center w-full h-[70%]'>
+            <div id='red-container' className='z-50 flex flex-row justify-center items-start w-full h-full mt-[100px] sm:mt-[75px] md:mt-[90px]' >
+                <div id='yellow-container' className='flex flex-row justify-center items-center w-[25%] mx-4 lg:hidden md:hidden sm:hidden'>
                     <div id='poster' className='h-full flex md:items-start md:justify-center px-2'>
                         <img
                             className='w-full md:w-full md:h-fit'
@@ -52,7 +46,7 @@ const MovieCard = ({ streamIndex, StreamType }) => {
                 </div>
                 <div
                     id='green-container'
-                    className='text-white flex justify-start items-center flex-col w-[60%] h-[650px] sm:h-[380px] sm:w-full sm:mx-2'
+                    className='text-white flex justify-start items-center flex-col w-[60%] h-[650px] sm:h-[680px] sm:w-full sm:mx-2'
                 >
                     <div id='text-container' className='h-full flex justify-start items-start flex-col w-full'>
                         <div id='stream-overview' className='flex justify-start items-start ml-2'>
@@ -73,13 +67,13 @@ const MovieCard = ({ streamIndex, StreamType }) => {
                             <div id='m' className='flex flex-col items-start h-full w-full'>
                                 <div
                                     id='overview-box'
-                                    className='flex flex-col justify-start items-start w-[75%] h-full pr-4 hover:overflow-y-auto scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-100'
+                                    className='flex flex-col justify-start items-start w-[75%] sm:w-full h-full pr-4 hover:overflow-y-auto scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-100'
                                 >
-                                    <p className='text-[20px] md:text-[14px] font-thin mt-1 mb-4'>{Movie.overview}</p>
+                                    <p className='text-[20px] md:text-[14px] sm:pr-4 font-thin mt-1 mb-4'>{Movie.overview}</p>
                                     <div id='trailer-box' className='flex flex-col justify-start p-4 items-start w-full h-full'>
                                         <iframe
                                             id='trailer'
-                                            className='w-full h-full md:h-[315px] sm:h-[200px]'
+                                            className='w-full h-full md:h-[315px] sm:h-[250px]'
                                             src={'https://www.youtube.com/embed/'+Trailer?.key}
                                             title='Trailer'
                                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -94,6 +88,7 @@ const MovieCard = ({ streamIndex, StreamType }) => {
             </div>
         </div>
     );
+    
 };
 
 export default React.memo(MovieCard);

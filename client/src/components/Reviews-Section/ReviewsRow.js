@@ -19,12 +19,12 @@ const ReviewsRow = ({ id, type }) => {
     }, [id, type]);
 
     return (
-        <div className="h-fit w-full grid-cols-2 overflow-x-auto p-4 bg-gray-900 my-4">
+        <div id='Review-Row' className="flex flex-col h-fit w-full grid-cols-2 overflow-x-auto p-4 bg-gray-900 my-4">
             {reviews.map((review, index) => (
                 <Review key={index} reviewer={review.author} text={review.content} rating={review.author_details.rating || 'N/A'} />
             ))}
         </div>
-    );
+    );    
 };
 
 export default React.memo(ReviewsRow);
