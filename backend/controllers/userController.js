@@ -77,7 +77,6 @@ export const loginUser = asynchandler(async (req, res) => {
             _id: user.id,
             name: user.username,
             email: user.email,
-            savedShows: user.savedShows,
         });
     } else {
         res.status(400).json({ message: 'Invalid credentials' });

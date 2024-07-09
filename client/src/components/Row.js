@@ -6,8 +6,12 @@ import { rowSlider } from '../utils'
 
 const Row = ({rowID, title, fetchURL}) => {
     const [movies, setMovies] = useState([])
-    const [savedShows, setSavedShows] = useState(JSON.parse(localStorage.getItem('savedShows')) || [])
-
+    const [savedShows, setSavedShows] = useState(() => {
+        // Retrieve savedShows from localStorage if it exists
+        const saved = localStorage.getItem("savedShows");
+        return saved ? JSON.parse(saved) : [];
+    });
+    
     
     const fetchUrls = async(url) =>{
         try{
@@ -21,8 +25,27 @@ const Row = ({rowID, title, fetchURL}) => {
     }
 
     useEffect(() => {
-        fetchUrls(fetchURL)
-    },[fetchURL])
+        const fetchSavedShow = async () => {
+            try {
+                const res = await axios.get(`${process.env.REACT_APP_API_BASE}/api/users/GetSavedShow`, {
+                    withCredentials: true,
+                });
+                const data = res.data;
+                console.log(data);
+                const parsedData = Array.isArray(data) ? data : JSON.parse(data); // Ensure data is parsed as an array
+                setSavedShows(parsedData);
+
+                // Store as a JSON string in localStorage
+                localStorage.setItem("savedShows", JSON.stringify(parsedData));
+            } catch (error) {
+                console.error("Error fetching saved shows:", error);
+            }
+        };
+
+        fetchUrls(fetchURL);
+        fetchSavedShow();
+    }, [fetchURL]); // Remove savedShows from dependency array
+
     
     return (
         <div id='rows' className='my-4'>

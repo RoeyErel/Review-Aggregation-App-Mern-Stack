@@ -10,6 +10,8 @@ const Movie = ({ item, liked }) => {
     const [isMovie, setIsMovie] = useState('');
     const [like, setLike] = useState(liked);
     
+    //if(liked) {console.log("item: ", item, liked);}
+
     const ifMovie = (Stream) => {
         setIsMovie(Stream.original_title != null || Stream.streamType === 'movie' ? 'movie' : 'tv');
     };
