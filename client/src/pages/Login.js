@@ -27,12 +27,17 @@ const Login = () => {
                 const res = await axios.get(`${process.env.REACT_APP_API_BASE}/api/users/me`, {
                     withCredentials: true,
                 });
+                // import savedShows from DB
+                const savedShows = JSON.stringify(response.data.savedShows);
                 
                 // turn username to a name with a capital letter
                 const firstLetter = res.data.username.charAt(0).toUpperCase();
                 const str = res.data.username.slice(1);
+
+                // set local storage
                 localStorage.setItem('username', firstLetter + str);
                 localStorage.setItem('ID', res.data.id);
+                localStorage.setItem('savedShows', savedShows);
 
                 navigate('/');
             }

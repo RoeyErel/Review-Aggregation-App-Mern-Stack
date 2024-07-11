@@ -21,7 +21,7 @@ const Navbar = () => {
         })
         .then(res => {
             if(res.status === 200){
-                localStorage.removeItem('username')
+                localStorage.clear();
                 navigate('/')
                 setUser(null)
             }
