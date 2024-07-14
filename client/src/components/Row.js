@@ -31,7 +31,6 @@ const Row = ({rowID, title, fetchURL}) => {
                     withCredentials: true,
                 });
                 const data = res.data;
-                console.log(data);
                 const parsedData = Array.isArray(data) ? data : JSON.parse(data); // Ensure data is parsed as an array
                 setSavedShows(parsedData);
 
