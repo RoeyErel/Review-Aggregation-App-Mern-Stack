@@ -28,8 +28,11 @@ const Row = ({rowID, title, fetchURL}) => {
         const fetchSavedShow = async () => {
             try {
                 const res = await axios.get(`${process.env.REACT_APP_API_BASE}/api/users/GetSavedShow`, {
-                    withCredentials: true,
+                    withCredentials: true, // Ensures that cookies (like your authorization token) are sent with the request
                 });
+                
+                
+                // If the response is successful, process the data
                 const data = res.data;
                 const parsedData = Array.isArray(data) ? data : JSON.parse(data); // Ensure data is parsed as an array
                 setSavedShows(parsedData);
@@ -37,13 +40,22 @@ const Row = ({rowID, title, fetchURL}) => {
                 // Store as a JSON string in localStorage
                 localStorage.setItem("savedShows", JSON.stringify(parsedData));
             } catch (error) {
-                console.error("Error fetching saved shows:", error);
+                // If there's an error, handle it appropriately
+                if (error.response && error.response.status === 401) {
+                    // Handle unauthorized access, perhaps redirect to login or show a message
+                    console.error("Unauthorized access - session might have expired or no valid token found.");
+                } else {
+                    console.error("Error fetching saved shows:", error);
+                }
             }
         };
 
+        // Fetch additional URLs if needed
         fetchUrls(fetchURL);
+        
+        // Fetch the saved shows
         fetchSavedShow();
-    }, [fetchURL]); // Remove savedShows from dependency array
+    }, [fetchURL]); // Fetch when fetchURL changes
 
     
     return (

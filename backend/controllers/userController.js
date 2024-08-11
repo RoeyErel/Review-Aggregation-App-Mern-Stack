@@ -59,28 +59,47 @@ export const registerUser = asynchandler (async (req, res) => {
 //@desc auth a user
 //@route POST /api/users/login
 //@access Public
-export const loginUser = asynchandler(async (req, res) => {
+export const loginUser = asynchandler(async (req, res, next) => {
     const { email, password } = req.body;
 
-    // Check for user email
-    const user = await User.findOne({ email });
+    try {
+        // Check if the email and password are provided
+        if (!email || !password) {
+            res.status(400);
+            throw new Error('Please provide both email and password');
+        }
 
-    if (user && await bcrypt.compare(password, user.password)) {
+        // Check for user email in the database
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            res.status(401);
+            throw new Error('Invalid credentials, user not found');
+        }
+
+        // Check if the password matches
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            res.status(401);
+            throw new Error('Invalid credentials, incorrect password');
+        }
+
+        // If everything is okay, create a cookie and send the response
         res.cookie('authorization', generateToken(user.id), {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production', // Set secure flag in production
+            secure: process.env.NODE_ENV === 'production',
             sameSite: 'lax',
             expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // Cookie expires in 30 days
         });
 
-        res.json({
+        res.status(200).json({
             _id: user.id,
             name: user.username,
             email: user.email,
             savedShows: user.savedShows,
         });
-    } else {
-        res.status(400).json({ message: 'Invalid credentials' });
+    } catch (error) {
+        next(error);
     }
 });
 

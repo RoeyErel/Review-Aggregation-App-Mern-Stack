@@ -31,7 +31,9 @@ const Signup = () => {
             fetch(process.env.REACT_APP_API_BASE + "/api/users/Signup", requestOptions)
                 .then(response => response.json().then(data => {
                         if(data.error != null){
-                            toastMessage("error", "top-center", "Invaild credentails")
+                            console.log(data.error);
+                            
+                            toastMessage("error", "top-center", data.error)
                             setError(data.error)
                         }else{
                             navigate('/login')

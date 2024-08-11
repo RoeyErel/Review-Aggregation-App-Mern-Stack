@@ -43,6 +43,8 @@ const Login = () => {
             }
         } catch (error) {
             if (error.response) {
+                console.log(error);
+                
                 setError('Invalid credentials');
                 toastMessage("error", "top-center", "Invalid credentials");
             } else {
